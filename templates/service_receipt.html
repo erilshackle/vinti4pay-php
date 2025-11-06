@@ -1,0 +1,43 @@
+<div style="max-width:700px;margin:30px auto;font-family:'Segoe UI',Arial,sans-serif;background:#fff;border:1px solid #ddd;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.08);">
+
+  <!-- Cabeçalho -->
+  <div style="background:#581b8a;color:#fff;padding:20px 30px;">
+    <h2 style="margin:0;font-size:22px;font-weight:600;">Recibo de Serviço</h2>
+    <p style="margin:4px 0 0;font-size:13px;opacity:.85;">Documento gerado automaticamente — sem valor fiscal</p>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div style="padding:28px 32px;">
+
+    <!-- Detalhes da transação -->
+    <table style="width:100%;border-collapse:collapse;font-size:14px;color:#333;">
+      <tr><td style="padding:6px 0;font-weight:600;">Record Type:</td><td align="right">{{RECORD_TYPE}}</td></tr>
+      <tr><td style="padding:6px 0;font-weight:600;">Merchant Reference:</td><td align="right">{{MERCHANT_REFERENCE}}</td></tr>
+      <tr><td style="padding:6px 0;font-weight:600;">Message ID:</td><td align="right">{{MESSAGE_ID}}</td></tr>
+      <tr><td style="padding:6px 0;font-weight:600;">Response Code:</td><td align="right"><span style="color:#28a745;font-weight:600;">{{RESPONSE_CODE}}</span></td></tr>
+      <tr><td style="padding:6px 0;font-weight:600;">Data/Hora da Transação:</td><td align="right">{{TRANSACTION_TIMESTAMP}}</td></tr>
+      <tr><td style="padding:6px 0;font-weight:600;">Clearing Period:</td><td align="right">{{CLEARING_PERIOD}}</td></tr>
+      <tr><td style="padding:6px 0;font-weight:600;">Transaction ID:</td><td align="right">{{TRANSACTION_ID}}</td></tr>
+      <tr><td style="padding:6px 0;font-weight:600;">PAN (últimos 4 dígitos):</td><td align="right">{{PAN}}</td></tr>
+      <tr><td style="padding:6px 0;font-weight:600;">Montante:</td><td align="right">{{AMOUNT}}</td></tr>
+      <tr><td style="padding:6px 0;font-weight:600;">Comissão:</td><td align="right">{{COMMISSION}}</td></tr>
+      <tr><td style="padding:6px 0;font-weight:600;">Entidade de Pagamento de Serviço:</td><td align="right">{{SERVICE_PAYMENT_ENTITY}}</td></tr>
+      <tr><td style="padding:6px 0;font-weight:600;">Referência de Pagamento:</td><td align="right">{{SERVICE_PAYMENT_REFERENCE}}</td></tr>
+      <tr><td style="padding:6px 0;font-weight:600;">Tipo de Cartão:</td><td align="right">{{CARD_TYPE}}</td></tr>
+    </table>
+
+    <hr style="margin:26px 0;border:0;border-top:1px solid #eee;">
+
+    <!-- Nota -->
+    <p style="margin:0;font-size:13px;color:#555;line-height:1.5;">
+      <strong>Nota:</strong> Este pagamento de serviço foi processado eletronicamente de acordo com as regras da rede Vinti4.
+      Em caso de dúvida, contacte a sua instituição financeira.
+    </p>
+
+  </div>
+
+  <!-- Rodapé com código de verificação -->
+  <div style="background:#f9fafb;text-align:center;padding:14px;font-size:12px;color:#888;border-top:1px solid #eee;">
+    Código de verificação: <code style="font-weight:600;">{{VERIFICATION_CODE}}</code>
+  </div>
+</div>
