@@ -12,9 +12,8 @@ trait PurchaseRequestTrait
      */
     protected function buildPurchaseRequest(array $billing): string
     {
-        $user = $billing['user'] ?? [];
-
-        $billing = array_merge($this->formatUserBillingData($user), $billing);
+        $user = isset($billing['user']) ? $this->formatUserBillingData($billing['user']) : [];
+        $billing = array_merge($user, $billing);
 
         $required = ['billAddrCountry', 'billAddrCity', 'billAddrLine1', 'billAddrPostCode', 'email'];
         $missing = array_diff($required, array_keys($billing));
