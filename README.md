@@ -1,6 +1,6 @@
 # Vinti4Pay PHP SDK
 
-[![PHP Version](https://img.shields.io/badge/PHP-%3E%3D8.0-8892BF)](https://www.php.net/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Packagist Version](https://img.shields.io/packagist/v/erilshk/vinti4pay-php)](https://packagist.org/packages/erilshk/vinti4pay-php) [![GitHub issues](https://img.shields.io/github/issues/erilshk/vinti4pay-php)](https://github.com/erilshk/vinti4pay-php/issues)
+[![Packagist Version](https://img.shields.io/packagist/v/erilshk/vinti4pay-php)](https://packagist.org/packages/erilshk/vinti4pay-php) [![PHP Version](https://img.shields.io/badge/PHP-%3E%3D8.0-8892BF)](https://www.php.net/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  [![GitHub issues](https://img.shields.io/github/issues/erilshackle/vinti4pay-php)](https://github.com/erilshackle/vinti4pay-php/issues) 
 
 ---
 
@@ -176,26 +176,13 @@ O objeto `$response` inclui:
 ## 🛠 Testes
 
 ```bash
+# run test
 composer install
 vendor/bin/phpunit
 ```
 
----
-
-## Confiabilidade
-
-![CI](https://github.com/erilshackle/vinti4pay-php/actions/workflows/ci.yml/badge.svg)
-
-
-[![Coverage Status](https://coveralls.io/repos/github/erilshackle/vinti4pay-php/badge.svg?branch=main)](https://coveralls.io/github/erilshackle/vinti4pay-php?branch=main)
-
-[![Coverage](https://codecov.io/gh/erilshk/vinti4pay-php/branch/main/graph/badge.svg)](https://codecov.io/gh/erilshackle/vinti4pay-php)
-
-## Status
-
-![Packagist Downloads](https://img.shields.io/packagist/dt/erilshk/vinti4pay-php)
-
-
+### Confiabilidade
+ ![CI](https://github.com/erilshackle/vinti4pay-php/actions/workflows/ci.yml/badge.svg) [![Coverage](https://codecov.io/gh/erilshackle/vinti4pay-php/branch/main/graph/badge.svg)](https://codecov.io/gh/erilshackle/vinti4pay-php)  ![Packagist Downloads](https://img.shields.io/packagist/dt/erilshk/vinti4pay-php)
 
 ---
 
@@ -210,3 +197,5 @@ MIT License – [LICENSE](LICENSE)
 * Página do projeto: [GitHub](https://github.com/erilshackle/vinti4pay-php)
 * Packagist: [erilshk/vinti4pay-php](https://packagist.org/packages/erilshk/vinti4pay-php)
 * Issues / suporte: [GitHub Issues](https://github.com/erilshackle/vinti4pay-php/issues)
+
+---
