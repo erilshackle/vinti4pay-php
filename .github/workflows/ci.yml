@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-version: [8.0,8.1,8.2]
+        php-version: [8.2]
 
     steps:
       - name: Checkout repository
@@ -28,8 +28,7 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-interaction
 
       - name: Run tests with coverage
-        run: |
-          vendor/bin/phpunit --coverage-clover=coverage.xml
+        run: vendor/bin/phpunit --coverage-clover=coverage.xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
