@@ -11,7 +11,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Erilshk\\Vinti4Pay\\": "src/Vinti4Pay"
+            "Erilshk\\Vinti4Pay\\": "src/"
         }
     },
     "autoload-dev": {
