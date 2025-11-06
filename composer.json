@@ -1,0 +1,32 @@
+{
+    "name": "erilshk/vinti4pay-php",
+    "description": "SDK PHP para integração com a plataforma Vinti4Net de Cabo Verde (Sisp -  Transactions, Refunds, DCC and Secure).",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["sisp", "vinti4", "vinti4net", "payment", "cabo verde", "3ds", "php", "web payment cv"],
+    "homepage": "https://github.com/erilshk/vinti4pay-php",
+    "support": {
+        "issues": "https://github.com/erilshk/vinti4pay-php/issues",
+        "source": "https://github.com/erilshk/vinti4pay-php"
+    },
+    "autoload": {
+        "psr-4": {
+            "Erilshk\\Vinti4Pay\\": "src/Vinti4Pay"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Erilshk\\Vinti4Pay\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=8.0",
+        "ext-json": "*",
+        "ext-hash": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
