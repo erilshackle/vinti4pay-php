@@ -32,7 +32,7 @@ composer require erilshk/vinti4pay-php
 Para quem não utiliza Composer, pode baixar a classe standalone **Vinti4Pay**:
 > Essa classe possui mesma _interface_ da lib, tendo limitações principalmente em relacção ao _processamento da resposta_ de retorno. 
 
-* Inclua o arquivo `Vinti4PayClient.php` e as classes dependentes manualmente.
+* Baixe e Inclua o arquivo `Vinti4PayClient.php` no seu projeto.
 * A estrutura e os métodos são praticamente **idênticos** aos do Composer, mantendo compatibilidade com todos os exemplos abaixo.
 
 _Exemplo de inclusão manual:_

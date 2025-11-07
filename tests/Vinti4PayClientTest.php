@@ -24,6 +24,15 @@ class Vinti4PayClientTest extends TestCase
 
         $client->preparePurchase(100.00, $billing, 'REF001', 'SESSION001');
 
+        // for next version
+        $client->setBillingParams(
+            $billing['email'],
+            $billing['billAddrCountry'],
+            $billing['billAddrCity'],
+            $billing['billAddrLine1'],
+            $billing['billAddrPostCode']
+        );
+
         $reflection = new ReflectionClass($client);
         $requestProp = $reflection->getProperty('request');
         $requestProp->setAccessible(true);
