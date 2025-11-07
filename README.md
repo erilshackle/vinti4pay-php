@@ -50,7 +50,7 @@ $vinti4 = new Vinti4PayClient('SEU_POS_ID', 'SEU_POS_AUTHCODE');
 
 | Requisito     | Versão / Detalhes      |
 | ------------- | ---------------------- |
-| PHP           | >= 8.0                 |
+| PHP           | 8.0+                   |
 | Extensão JSON | (**ext-json**) Ativada |
 | Extensão Hash | (**ext-hash)** Ativada |
 | Composer      | Opcional (recomendado) |
@@ -173,19 +173,15 @@ O objeto `$response` inclui:
 
 ---
 
-## 🛠 Testes
-
-```bash
-# run test
-composer install
-vendor/bin/phpunit
-```
-
-### Confiabilidade
-![Coverage trend](https://codecov.io/gh/erilshackle/vinti4pay-php/branch/main/graphs/sunburst.svg)
+## 🛠 Testes e Confiabilidade
 
  ![CI](https://github.com/erilshackle/vinti4pay-php/actions/workflows/ci.yml/badge.svg) ![PHPStan Level](https://img.shields.io/badge/PHPStan-Level%209-brightgreen) [![Coverage](https://codecov.io/gh/erilshackle/vinti4pay-php/branch/main/graph/badge.svg)](https://codecov.io/gh/erilshackle/vinti4pay-php)  ![Packagist Downloads](https://img.shields.io/packagist/dt/erilshk/vinti4pay-php)  
 
+```bash
+# run test with PHPUnit
+composer istall
+vendor/bin/phpunit
+```
 ---
 
 ## 📄 Licença
@@ -198,6 +194,7 @@ MIT License – [LICENSE](LICENSE)
 
 * Página do projeto: [GitHub](https://github.com/erilshackle/vinti4pay-php)
 * Packagist: [erilshk/vinti4pay-php](https://packagist.org/packages/erilshk/vinti4pay-php)
+* Documentação: [Docs](https://github.com/erilshackle/vinti4pay-php/docs)
 * Issues / suporte: [GitHub Issues](https://github.com/erilshackle/vinti4pay-php/issues)
 
 ---
