@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use Erilshk\Vinti4Pay\Vinti4PayClient;
 use Erilshk\Vinti4Pay\Exceptions\Vinti4Exception;
+use Erilshk\Vinti4Pay\Models\ResponseResult;
 
 class Vinti4PayClientTest extends TestCase
 {
@@ -73,6 +74,32 @@ class Vinti4PayClientTest extends TestCase
         $client->setRequestParams(['invalidKey' => 123]);
     }
 
+    public function testCurrencyToCodeConvertsKnownCurrencies()
+    {
+        $client = new Vinti4PayClient($this->posID, $this->authCode);
+
+        $ref = new ReflectionClass($client);
+        $method = $ref->getMethod('currencyToCode');
+        $method->setAccessible(true);
+
+        $this->assertEquals(132, $method->invoke($client, 'CVE'));
+        $this->assertEquals(840, $method->invoke($client, 'usd'));
+        $this->assertEquals(978, $method->invoke($client, 'EUR'));
+        $this->assertEquals(132, $method->invoke($client, '132')); // já numérico
+    }
+
+    public function testCurrencyToCodeThrowsForInvalid()
+    {
+        $this->expectException(Vinti4Exception::class);
+
+        $client = new Vinti4PayClient($this->posID, $this->authCode);
+        $ref = new ReflectionClass($client);
+        $method = $ref->getMethod('currencyToCode');
+        $method->setAccessible(true);
+
+        $method->invoke($client, 'XYZ');
+    }
+
     public function testCreatePaymentFormCallsSdkMethods()
     {
         // Cria um mock do SDK
@@ -113,32 +140,6 @@ class Vinti4PayClientTest extends TestCase
         $client->createPaymentForm('https://callback.test');
     }
 
-    public function testCurrencyToCodeConvertsKnownCurrencies()
-    {
-        $client = new Vinti4PayClient($this->posID, $this->authCode);
-
-        $ref = new ReflectionClass($client);
-        $method = $ref->getMethod('currencyToCode');
-        $method->setAccessible(true);
-
-        $this->assertEquals(132, $method->invoke($client, 'CVE'));
-        $this->assertEquals(840, $method->invoke($client, 'usd'));
-        $this->assertEquals(978, $method->invoke($client, 'EUR'));
-        $this->assertEquals(132, $method->invoke($client, '132')); // já numérico
-    }
-
-    public function testCurrencyToCodeThrowsForInvalid()
-    {
-        $this->expectException(Vinti4Exception::class);
-
-        $client = new Vinti4PayClient($this->posID, $this->authCode);
-        $ref = new ReflectionClass($client);
-        $method = $ref->getMethod('currencyToCode');
-        $method->setAccessible(true);
-
-        $method->invoke($client, 'XYZ');
-    }
-
     public function testPrepareServicePaymentSetsRequestCorrectly()
     {
         $client = new Vinti4PayClient($this->posID, $this->authCode);
@@ -152,6 +153,75 @@ class Vinti4PayClientTest extends TestCase
         $this->assertEquals('service', $ref->getProperty('mode')->getValue($client));
         $this->assertEquals('123', $request['entityCode']);
         $this->assertEquals('456', $request['referenceNumber']);
+    }
+
+    public function testPrepareRechargeSetsRequestCorrectly()
+    {
+        $client = new Vinti4PayClient($this->posID, $this->authCode);
+        $client->prepareRecharge(25.5, '321', '999', 'REFR', 'SESSR');
+
+        $ref = new ReflectionClass($client);
+        $prop = $ref->getProperty('request');
+        $prop->setAccessible(true);
+        $request = $prop->getValue($client);
+
+        $this->assertEquals('recharge', $ref->getProperty('mode')->getValue($client));
+        $this->assertEquals('321', $request['entityCode']);
+        $this->assertEquals('999', $request['referenceNumber']);
+        $this->assertEquals('REFR', $request['merchantRef']);
+    }
+
+    public function testPrepareRefundSetsRequestCorrectly()
+    {
+        $client = new Vinti4PayClient($this->posID, $this->authCode);
+        $client->prepareRefund(30.0, 'MREF', 'MSESS', 'TXN001', 'PERIODX');
+
+        $ref = new ReflectionClass($client);
+        $prop = $ref->getProperty('request');
+        $prop->setAccessible(true);
+        $request = $prop->getValue($client);
+
+        $this->assertEquals('refund', $ref->getProperty('mode')->getValue($client));
+        $this->assertEquals(30.0, $request['amount']);
+        $this->assertEquals('TXN001', $request['transactionID']);
+        $this->assertEquals('PERIODX', $request['clearingPeriod']);
+    }
+
+    public function testProcessResponseCallsProcessPaymentResponse()
+    {
+        $sdkMock = $this->createMock(\Erilshk\Vinti4Pay\Vinti4Pay::class);
+        $mockResult = $this->createMock(ResponseResult::class);
+        $sdkMock->expects($this->once())
+            ->method('processPaymentResponse')
+            ->willReturn($mockResult);
+
+        $client = new Vinti4PayClient($this->posID, $this->authCode);
+        $ref = new ReflectionClass($client);
+        $prop = $ref->getProperty('sdk');
+        $prop->setAccessible(true);
+        $prop->setValue($client, $sdkMock);
+
+        $result = $client->processResponse(['messageType' => '8']);
+        $this->assertInstanceOf(ResponseResult::class, $result);
+    }
+
+    public function testProcessResponseCallsProcessRefundResponse()
+    {
+        $sdkMock = $this->createMock(\Erilshk\Vinti4Pay\Vinti4Pay::class);
+        $mockResult = $this->createMock(ResponseResult::class);
+        $sdkMock->expects($this->once())
+            ->method('processRefundResponse')
+            ->willReturn($mockResult);
+
+        $client = new Vinti4PayClient($this->posID, $this->authCode);
+        $ref = new ReflectionClass($client);
+        $prop = $ref->getProperty('sdk');
+        $prop->setAccessible(true);
+        $prop->setValue($client, $sdkMock);
+
+        // Qualquer uma dessas condições deve acionar refund
+        $result = $client->processResponse(['transactionCode' => \Erilshk\Vinti4Pay\Vinti4Pay::TRANSACTION_TYPE_REFUND]);
+        $this->assertInstanceOf(ResponseResult::class, $result);
     }
 
     public function testReceiptReturnsReceiptInstance()
