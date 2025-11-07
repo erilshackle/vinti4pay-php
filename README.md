@@ -182,7 +182,11 @@ vendor/bin/phpunit
 ```
 
 ### Confiabilidade
- ![CI](https://github.com/erilshackle/vinti4pay-php/actions/workflows/ci.yml/badge.svg) [![Coverage](https://codecov.io/gh/erilshackle/vinti4pay-php/branch/main/graph/badge.svg)](https://codecov.io/gh/erilshackle/vinti4pay-php)  ![Packagist Downloads](https://img.shields.io/packagist/dt/erilshk/vinti4pay-php)
+ ![CI](https://github.com/erilshackle/vinti4pay-php/actions/workflows/ci.yml/badge.svg) ![PHPStan Level](https://img.shields.io/badge/PHPStan-Level%209-brightgreen) [![Coverage](https://codecov.io/gh/erilshackle/vinti4pay-php/branch/main/graph/badge.svg)](https://codecov.io/gh/erilshackle/vinti4pay-php)  ![Packagist Downloads](https://img.shields.io/packagist/dt/erilshk/vinti4pay-php)  
+
+![Coverage trend](https://codecov.io/gh/erilshackle/vinti4pay-php/branch/main/graphs/sunburst.svg?token=XXX)
+
+![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=erilshackle&repo=vinti4pay-php&theme=github-light)
 
 ---
 

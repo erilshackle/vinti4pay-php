@@ -295,11 +295,13 @@ class Vinti4Pay
         }
 
         // Parse DCC se existir
-        if (!empty($postData['merchantRespDCCData'])) {
-            $decoded = json_decode($postData['merchantRespDCCData'], true);
-            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
-                $result['dcc'] = $decoded;
-            }
+        if (!empty($postData['dcc']) && $postData['dcc'] == 'Y') {
+            $result['dcc'] = [
+                'amount' => $postData['dccAmount'] ?? '',
+                'currency' => $postData['dccCurrency'] ?? '',
+                'markup' => $postData['dccMarkup'] ?? '',
+                'rate' => $postData['dccRate'] ?? ''
+            ];
         }
 
         // Mensagem de sucesso
