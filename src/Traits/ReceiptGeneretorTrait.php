@@ -2,15 +2,16 @@
 
 namespace Erilshk\Vinti4Pay\Traits;
 
-trait ReceiptGeneretorTrait{
+trait ReceiptGeneretorTrait
+{
 
-    
+
     /**
      * Prepara dados comuns para qualquer tipo de recibo
      *
      * @return array Dados formatados e escapados prontos para render
      */
-    private function prepareReceiptData(): array
+    private function prepareReceiptData($data = []): array
     {
         $d = $this->data;
         $dcc = $this->dcc ?? [];
@@ -20,7 +21,7 @@ trait ReceiptGeneretorTrait{
         $typeLabel = 'Transaction';
 
         // Campos reais do retorno
-        $merchantRef = $escape($d['merchantRespMerchantRef'] ?? '');
+        $merchantRef = $escape($d['merchantRespMerchantRef'] ?? '-');
         $messageId = $escape($d['merchantRespMessageID'] ?? '');
         $clearingPeriod = $escape($d['merchantRespCP'] ?? '');
         $responseCode = $escape($d['merchantResp'] ?? '');
@@ -37,7 +38,10 @@ trait ReceiptGeneretorTrait{
 
 
         $statusColor = $this->success ? '#0a8a00' : '#dc3545';
-        $statusText = $this->success ? 'Aprovada' : 'Falhou';
+        $statusText = $this->success ? 'Aprovada' : ($this->status == 'CANCELLED' ? 'Cancelado' : 'Falhou');
+        $entity = $data['entity'] ?? '';
+        $footer = $data['footer'] ?? '';
+
 
         return compact(
             'recordType',
@@ -57,22 +61,40 @@ trait ReceiptGeneretorTrait{
             'dccMarkup',
             'statusColor',
             'statusText',
-            'dcc'
+            'dcc',
+            'entity',
+            'footer'
         );
     }
 
 
 
-    public function generateReceipt(): string
+    public function generateReceipt($copyright = ''): string
     {
-        $d = $this->prepareReceiptData();
+        $data = [];
+         if (!empty($copyright)) {
+            if (str_word_count($copyright) > 2) {
+                $data['footer'] = $copyright;
+            } else {
+                $data['entity'] = $copyright;
+            }
+        }
+        $d = $this->prepareReceiptData($data);
         // render técnico (todos os campos)
         return $this->renderReceiptHtml($d, true);
     }
 
-    public function generateClientReceipt(): string
+    public function generateClientReceipt($copyright = ''): string
     {
-        $d = $this->prepareReceiptData();
+        $data = [];
+        if (!empty($copyright)) {
+            if (str_word_count($copyright) > 2) {
+                $data['footer'] = $copyright;
+            } else {
+                $data['entity'] = $copyright;
+            }
+        }
+        $d = $this->prepareReceiptData($data);
         // render cliente (campos resumidos)
         return $this->renderReceiptHtml($d, false);
     }
@@ -139,10 +161,12 @@ trait ReceiptGeneretorTrait{
             $html .= "</div>";
         }
 
-        $html .= "<p style=\"text-align:center;margin-top:25px;color:#777;font-size:0.8em;\">© 2025 SISP — Cabo Verde Payment System</p>";
+        $line = !empty($entity) ? ("© " . date('Y') . " {$entity}") : 'Receipt enerated automatically By Vinti4Pay';
+        $line = !empty($footer) ? $footer : $line;
+
+        $html .= "<p style=\"text-align:center;margin-top:25px;color:#777;font-size:0.8em;\">$line</p>";
         $html .= "</div>";
 
         return $html;
     }
-
 }

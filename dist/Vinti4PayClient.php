@@ -6,6 +6,12 @@
  * Cliente PHP para integração com o gateway de pagamentos Vinti4.
  * Permite preparar, enviar e processar transações de compra, serviço, recarga e reembolso.
  *
+ * Funcionalidades principais:
+ * - Criação de formulários automáticos de pagamento
+ * - Geração de fingerprints (assinaturas) de segurança
+ * - Processamento de callbacks (respostas) do gateway Vinti4Net
+ * - Validação de respostas com verificação de integridade
+ * 
  * @author Eril TS Carvalho
  * @version 1.0.0
  * @license MIT
