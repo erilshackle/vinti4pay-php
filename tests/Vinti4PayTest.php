@@ -81,8 +81,8 @@ class Vinti4PayTest extends TestCase
             'transactionCode' => 2
         ]);
 
-        $html = $this->vinti4->renderForm($data, 'Aguarde...');
-        $this->assertStringContainsString('Aguarde...', $html);
+        $html = $this->vinti4->renderForm($data);
+        $this->assertStringContainsString('Processando o pagamento... por favor aguarde', $html);
         $this->assertStringContainsString('<form', $html);
         $this->assertStringContainsString('input type=\'hidden\'', $html);
     }

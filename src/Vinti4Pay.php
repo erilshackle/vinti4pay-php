@@ -257,7 +257,7 @@ class Vinti4Pay
     // -------------------------
     // 🖥 Render Form
     // -------------------------
-    public function renderForm(array $data, string $redirectMessage = "Processando o pagamento, por favor aguarde"): string
+    public function renderForm(array $data): string
     {
         $inputs = '';
         foreach ($data['fields'] as $k => $v) {
@@ -266,7 +266,7 @@ class Vinti4Pay
         return "
         <html>
             <body onload='document.forms[0].submit()' style='text-align:center;padding:30px;font-family:Arial,sans-serif;'>
-                <h3>$redirectMessage</h3>
+                <h3>Processando o pagamento... por favor aguarde</h3>
                 <form action='" . htmlspecialchars($data['postUrl']) . "' method='post'>
                     $inputs
                 </form>

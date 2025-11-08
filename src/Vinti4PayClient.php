@@ -32,6 +32,7 @@ class Vinti4PayClient
     protected Vinti4Pay $sdk;
     protected ?array $request = null;
     protected array $params = [];
+    protected array $results = [];
     protected string $mode = '';
 
     /**
@@ -98,6 +99,101 @@ class Vinti4PayClient
     }
 
     /**
+     * Sets and validates customer billing details.
+     * 
+     * **Required fields**
+     * | Param | Type | Description |
+     * |--------|------|-------------|
+     * | `$email` | string | Customer email |
+     * | `$country` | string | Billing country code (ISO alpha or numeric) |
+     * | `$city` | string | Billing city |
+     * | `$address` | string | Billing address line 1 |
+     * | `$postCode` | string | Postal code |
+     *
+     * **Optional fields (in $aditional)**
+     * - `billAddrLine2`, `billAddrLine3`, `billAddrState`
+     * - `shipAddrCountry`, `shipAddrCity`, `shipAddrLine1`, `shipAddrPostCode`, `shipAddrState`
+     * - `addrMatch` = 'Y' or 'N' (copy billing to shipping if 'Y')
+     * - `acctID`, `acctInfo` (array), `workPhone`, `mobilePhone` (`['cc'=>'238','subscriber'=>'9112233']`)
+     *
+     * @param string $email
+     * @param string $country
+     * @param string $city
+     * @param string $address
+     * @param string $postCode
+     * @param array  $aditional
+     * @return static
+     * @throws Vinti4Exception If required fields are invalid.
+     */
+    public function setBillingParams(
+        string $email,
+        string $country,
+        string $city,
+        string $address,
+        string $postCode,
+        array $aditional = []
+    ): static {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new Vinti4Exception("Invalid email.");
+        }
+
+        $addrMatch = in_array(strtoupper($aditional['addrMatch'] ?? 'N'), ['Y', 'N']) ? strtoupper($aditional['addrMatch']) : 'N';
+
+        $billing = [
+            'billAddrCountry' => $country,
+            'billAddrCity'    => $city,
+            'billAddrLine1'   => $address,
+            'billAddrPostCode' => $postCode,
+            'email'           => $email,
+            'addrMatch'       => $addrMatch,
+        ];
+
+        foreach (
+            [
+                'billAddrLine2',
+                'billAddrLine3',
+                'billAddrState',
+                'shipAddrCountry',
+                'shipAddrCity',
+                'shipAddrLine1',
+                'shipAddrPostCode',
+                'shipAddrState',
+                'acctID'
+            ] as $k
+        ) {
+            if (!empty($aditional[$k])) $billing[$k] = $aditional[$k];
+        }
+
+        if (!empty($aditional['acctInfo']) && is_array($aditional['acctInfo'])) {
+            $billing['acctInfo'] = array_filter($aditional['acctInfo'], fn($v) => $v !== '');
+        }
+
+        foreach (['workPhone', 'mobilePhone'] as $p) {
+            if (!empty($aditional[$p])) {
+                $phone = $aditional[$p];
+                if (!isset($phone['cc'], $phone['subscriber'])) {
+                    throw new Vinti4Exception("Phone '$p' must have 'cc' and 'subscriber'.");
+                }
+                $billing[$p] = ['cc' => trim($phone['cc']), 'subscriber' => trim($phone['subscriber'])];
+            }
+        }
+
+        if ($addrMatch === 'Y') {
+            $billing += [
+                'shipAddrCountry' => $country,
+                'shipAddrCity' => $city,
+                'shipAddrLine1' => $address,
+                'shipAddrPostCode' => $postCode,
+            ];
+            if (!empty($billing['billAddrState'])) $billing['shipAddrState'] = $billing['billAddrState'];
+        }
+
+        $this->params['billing'] = array_merge($this->params['billing'] ?? [], $billing);
+        return $this;
+    }
+
+
+    /**
      * Set additional optional parameters for the transaction.
      *
      * Only keys defined in $allowedParams are permitted.
@@ -127,7 +223,9 @@ class Vinti4PayClient
      * Can be chained with `createPaymentForm()` to generate the final HTML form.
      *
      * @param float|string $amount Transaction amount
-     * @param array $billing Required billing data:
+     * @param array{
+     * billAddrCountry:string, billAddrCity:string, billAddrLine1:string, billAddrPostCode:string, email:string
+     * } $billing Required billing data:
      *   - 'billAddrCountry', 'billAddrCity', 'billAddrLine1', 'billAddrPostCode', 'email'
      *   - Optional: 'addrMatch', 'billAddrLine2', etc.
      * @param string|null $merchantRef Merchant reference (optional)
@@ -147,7 +245,6 @@ class Vinti4PayClient
             'merchantRef'     => $merchantRef ?: null,
             'merchantSession' => $merchantSession ?: null,
         ];
-
         return $this;
     }
 
@@ -255,7 +352,7 @@ class Vinti4PayClient
      * @return string HTML form ready to submit
      * @throws Vinti4Exception If no transaction has been prepared
      */
-    public function createPaymentForm(string $responseUrl, $redirectMessage = 'processing...'): string
+    public function createPaymentForm(string $responseUrl): string
     {
         if ($this->request === null) {
             throw new Vinti4Exception("CreatePaymentForm Error: No transaction has been prepared.");
@@ -266,7 +363,7 @@ class Vinti4PayClient
             $this->request
         ));
 
-        return $this->sdk->renderForm($prepared, $redirectMessage);
+        return $this->sdk->renderForm($prepared);
     }
 
 
@@ -294,8 +391,9 @@ class Vinti4PayClient
         return $this->sdk->processPaymentResponse($postData);
     }
 
-    public function receipt($data)
+    public function receipt(ResponseResult|array $res)
     {
+        $data = is_array($res) ? $res : $res->getData();
         return new Receipt($data);
     }
 }

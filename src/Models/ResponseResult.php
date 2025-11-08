@@ -84,6 +84,16 @@ class ResponseResult  implements JsonSerializable
         return $this->success;
     }
 
+    public function isSuspicious(): bool
+    {
+        return $this->status === self::STATUS_INVALID_FINGERPRINT;
+    }
+
+    public function isCancelled(): bool
+    {
+        return $this->status === self::STATUS_CANCELLED;
+    }
+
     public function getData(): array
     {
         return $this->data;
@@ -108,6 +118,22 @@ class ResponseResult  implements JsonSerializable
         return $this->detail;
     }
 
+    /**
+     * Checks if transaction has invalid fingerprint.
+     *
+     * @param &$result hold the resulted fingerprint came from postData;
+     * @return string|null The invalid fingerprint or null otherwise.
+     */
+    public function hasInvalidFingerprint(&$result = null): ?string
+    {
+        if ($this->status === self::STATUS_INVALID_FINGERPRINT) {
+            $result = $this->data['resultFingerPrint'];
+            return true;
+        }
+        $result = null;
+        return false;
+    }
+
 
     /**
      * Returns a human-friendly label for the current transaction status.
@@ -123,18 +149,6 @@ class ResponseResult  implements JsonSerializable
             default => $lang == 'pt' ? 'Erro ao processar a transação' : 'Transaction Error',
         };
     }
-
-
-    /**
-     * Gets the invalid fingerprint when fingerprint is invalid or false.
-     *
-     * @return string|null The invalid fingerprint or null otherwise.
-     */
-    public function getInvalidFingerprint(): ?string
-    {
-        return $this->status === self::STATUS_INVALID_FINGERPRINT  ? $this->data['resultFingerPrint'] : null;
-    }
-
 
     /**
      * Gets the transaction receipt ()

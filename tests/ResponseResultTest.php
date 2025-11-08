@@ -74,7 +74,8 @@ class ResponseResultTest extends TestCase
         $data['data']['resultFingerPrint'] = 'abc123';
         $result = new ResponseResult($data);
 
-        $this->assertSame('abc123', $result->getInvalidFingerprint());
+        $result->hasInvalidFingerprint($fp);
+        $this->assertSame('abc123', $fp);
     }
 
     public function testGetMerchantReceipt()
