@@ -6,8 +6,10 @@
  * Cliente PHP para integração com o gateway de pagamentos Vinti4.
  * Permite preparar, enviar e processar transações de compra, serviço, recarga e reembolso.
  *
- * @author  
+ * @author Eril TS Carvalho
  * @version 1.0.0
+ * @license MIT
+ * @link https://github.com/erilshackle/vinti4pay-php/blob/main/dist/docs.md
  */
 class Vinti4PayClient
 {
@@ -342,6 +344,8 @@ class Vinti4PayClient
      *
      * @return static Retorna a instância atual para encadeamento de chamadas (fluent interface).
      * @throws Exception Se já existir uma transação configurada.
+     * @todo remover parametro $billing e deixar que setBillingParams() seja exclusivamente responsavel por isso.
+     * @todo remover parametro merchantSession pois nao é um parametro que deve chamar a antenção logo no prepare. mover para setRequestParams
      */
     public function preparePurchase(float|string $amount, array $billing, ?string $merchantRef = null, ?string $merchantSession = null): static
     {
@@ -385,6 +389,7 @@ class Vinti4PayClient
      *
      * @return static Retorna a instância atual para encadeamento.
      * @throws Exception Se já existir uma transação configurada.
+     * @todo remover parametro merchantSession pois nao é um parametro que deve chamar a antenção logo no prepare. mover para setRequestParams
      */
     public function prepareServicePayment(float|string $amount, string $entity, string $reference, ?string $merchantRef = null, ?string $merchantSession = null): static
     {
@@ -428,6 +433,7 @@ class Vinti4PayClient
      *
      * @return static Retorna a instância atual.
      * @throws Exception Se já existir uma transação configurada.
+     * @todo remover parametro merchantSession pois nao é um parametro que deve chamar a antenção logo no prepare. mover para setRequestParams
      */
     public function prepareRecharge(float|string $amount, string $entity, string $number, ?string $merchantRef = null, ?string $merchantSession = null): static
     {
@@ -555,6 +561,7 @@ class Vinti4PayClient
      * @param array $billing Dados do cliente.
      * @return string Base64 JSON codificado.
      * @throws Exception Caso a codificação JSON falhe.
+     * @todo adicionar tratamento de mais parametros adicionais.
      */
     private function buildPurchaseRequest(array $billing = []): string
     {
@@ -695,7 +702,7 @@ class Vinti4PayClient
      *
      * @throws Exception Se nenhuma transação tiver sido preparada.
      */
-    public function createPaymentForm(string $responseUrl, string $redirectMessage = "Processando o pagamento..."): string
+    public function createPaymentForm(string $responseUrl): string
     {
         if ($this->request === null) {
             throw new Exception("No transaction prepared.");
@@ -714,7 +721,6 @@ class Vinti4PayClient
         return "
     <html>
         <body onload='document.forms[0].submit()' style='text-align:center;padding:30px;font-family:Arial,sans-serif;'>
-            <h3>$redirectMessage</h3>
             <form action='" . htmlspecialchars($prepared['postUrl']) . "' method='post'>
                 $inputs
             </form>
@@ -816,6 +822,8 @@ class Vinti4PayClient
      *  - `detail` (string opcional)
      *
      * @throws Exception Nunca lança exceção diretamente; retorna status de erro padronizado.
+     * 
+     * @todo adiocionar um parametro ou chave que recebe o recido simples pre-renderizado.
      */
     public function processResponse(array $postData): array
     {
