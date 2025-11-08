@@ -1,4 +1,5 @@
 # Excluir diretórios não necessários no pacote Composer
+/dist export-ignore
 /docs export-ignore
 /tests export-ignore
 /.github export-ignore
@@ -8,5 +9,5 @@
 /.editorconfig export-ignore
 /.phpunit.result.cache export-ignore
 /phpunit.xml export-ignore
-/README.md export-ignore
-/CHANGELOG.md export-ignore
+# /README.md export-ignore
+# /CHANGELOG.md export-ignore
