@@ -194,7 +194,7 @@ MIT License – [LICENSE](LICENSE)
 
 * Página do projeto: [GitHub](https://github.com/erilshackle/vinti4pay-php)
 * Packagist: [erilshk/vinti4pay-php](https://packagist.org/packages/erilshk/vinti4pay-php)
-* Documentação: [Docs](https://github.com/erilshackle/vinti4pay-php/docs)
+* Documentação: [Docs](https://erilshackle.github.io/vinti4pay-php/)
 * Issues / suporte: [GitHub Issues](https://github.com/erilshackle/vinti4pay-php/issues)
 
 ---
