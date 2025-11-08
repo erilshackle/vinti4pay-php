@@ -7,6 +7,54 @@ use Erilshk\Vinti4Pay\Exceptions\Vinti4Exception;
 use Erilshk\Vinti4Pay\Traits\PurchaseRequestTrait;
 
 
+/**
+ * Vinti4Pay (Core PHP SDK)
+ *
+ * This class provides the cores methods to integrate with the Vinti4Net payment platform.
+ * It supports payment transactions, service payments, recharges, and refunds.
+ * 
+ * Use it for more advance control over your request and response.
+ * {@see(Vinti4PayClient)} for better usablity.
+ * 
+ * Features include:
+ *  - Preparing payments and refunds
+ *  - Generating and validating request and response fingerprints
+ *  - Handling 3DS purchase requests
+ *  - Parsing Dynamic Currency Conversion (DCC) responses
+ *  - Rendering HTML forms for automatic submission to Vinti4Net
+ *
+ * Example usage:
+ * ```php
+ * $vinti4Pay = new Vinti4Pay('POS_ID', 'POS_AUTH_CODE');
+ *
+ * // Prepare a payment
+ * $paymentData = $vinti4Pay->preparePayment('https://mysite.cv/vinti4/callback', [
+ *     'amount' => 1500.00,
+ *     'transactionCode' => 1,
+ *     'billing' => [
+ *         'billAddrCountry' => 'CV',
+ *         'billAddrCity' => 'Praia',
+ *         'billAddrLine1' => 'Av. Principal 10',
+ *         'billAddrPostCode' => '7600',
+ *         'email' => 'customer@email.cv'
+ *     ]
+ * ]);
+ *
+ * // Render the form for automatic submission
+ * echo $vinti4Pay->renderForm($paymentData);
+ *
+ * // Process a callback
+ * $responseResult = $vinti4Pay->processPaymentResponse($_POST);
+ * 
+ * if ($responseResult->isSiccessfull()) {
+ *     echo "Transaction successful: " . $responseResult->getStatus();
+ * } else {
+ *     echo "Transaction failed: " . $responseResult->getMessage();
+ * }
+ * ```
+ *
+ * @package Erilshk\Vinti4Pay
+ */
 class Vinti4Pay
 {
     use PurchaseRequestTrait;
@@ -148,42 +196,43 @@ class Vinti4Pay
     // -------------------------
 
     /**
-     * Prepara os dados da transação para o Vinti4Pay.
+     * Prepares the transaction data for Vinti4Pay.
      *
-     * Este método monta o payload completo de pagamento, incluindo o cálculo de fingerprint,
-     * e a estrutura opcional de 3DS (`purchaseRequest`) quando aplicável.
+     * This method builds the complete payment payload, including the fingerprint calculation,
+     * and the optional 3DS structure (`purchaseRequest`) when applicable.
      *
-     * Retorna um array contendo a URL de submissão e os campos necessários para o formulário HTML.
+     * Returns an array containing the submission URL and the required fields for the HTML form.
      *
-     * Exemplo de uso:
+     * Example usage:
      * ```php
      * $payment = $vinti4->preparePayment([
      *     'amount' => 1500.00,
-     *     'responseUrl' => 'https://meusite.cv/vinti4/callback',
+     *     'responseUrl' => 'https://mysite.cv/vinti4/callback',
      *     'transactionCode' => 1,
      *     'billing' => [
      *         'billAddrCountry' => 'CV',
      *         'billAddrCity' => 'Praia',
      *         'billAddrLine1' => 'Av. Principal 10',
      *         'billAddrPostCode' => '7600',
-     *         'email' => 'cliente@email.cv'
+     *         'email' => 'customer@email.cv'
      *     ]
      * ]);
      * ```
      *
-     * @param string $responseUrl URL de callback
-     * @param array $params Parâmetros da transação:
-     **  - `amount` *(float|string)*: Valor da transação (obrigatório)
-     **  - `transactionCode` *(string)*: Código da transação (`1`, `2`, `3`) [default=`1`]
-     **  - `billing` *(array)*: Dados de faturação para transações de compra
-     *   - `merchantRef` *(string)*: Referência interna do comerciante (recomendado)
-     *   - `merchantSession` *(string)*: Sessão interna do comerciante (recomendado)
-     *   - currency (string|int, opcional): Código da moeda (ISO4217). @link https://www.iban.com/country-codes
-     *   - `languageMessages` *(string)*: Idioma (`pt` ou `en`) [default=`pt`]
-     *   - `entityCode` *(string)*: Código da entidade (para pagamentos de serviços)
-     *   - `referenceNumber` *(string)*: Número de referência (para pagamentos de serviços)
-     * @return array{postUrl:string, fields:array}
-     * @throws Vinti4Exception Se campos obrigatórios estiverem ausentes ou billing estiver incompleto
+     * @param string $responseUrl Callback URL
+     * @param array $params Transaction parameters:
+     *   - `amount` *(float|string)*: Transaction amount (required)
+     *   - `transactionCode` *(string)*: Transaction code (`1`, `2`, `3`) [default=`1`]
+     *   - `billing` *(array)*: Billing information for purchase transactions
+     *     - `merchantRef` *(string)*: Internal merchant reference (recommended)
+     *     - `merchantSession` *(string)*: Internal merchant session (recommended)
+     *     - `currency` *(string|int, optional)*: Currency code (ISO4217). @link https://www.iban.com/country-codes
+     *     - `languageMessages` *(string)*: Language (`pt` or `en`) [default=`pt`]
+     *     - `entityCode` *(string)*: Entity code (for service payments)
+     *     - `referenceNumber` *(string)*: Reference number (for service payments)
+     *
+     * @return array{postUrl: string, fields: array}
+     * @throws Vinti4Exception If required fields are missing or billing info is incomplete
      */
     public function preparePayment(string $responseUrl, array $params): array
     {
@@ -277,6 +326,35 @@ class Vinti4Pay
     // -------------------------
     // 🧾 Process Payment Response
     // -------------------------
+
+    /**
+     * Processes the payment response from Vinti4Pay.
+     *
+     * This method validates the payment response data, checks for user cancellation,
+     * parses DCC (Dynamic Currency Conversion) information if present,
+     * verifies the fingerprint, and returns a structured result.
+     *
+     * The returned `ResponseResult` contains:
+     *  - `status`: Status code ('SUCCESS', 'ERROR', 'CANCELLED', 'INVALID_FINGERPRINT', etc.)
+     *  - `message`: Human-readable message (based on language or server response)
+     *  - `success`: Boolean indicating if the payment was successfully processed
+     *  - `data`: Original POST data
+     *  - `dcc`: Optional DCC information if the transaction used Dynamic Currency Conversion
+     *  - `debug`: Optional debug information (e.g., fingerprint comparison)
+     *
+     * Behavior details:
+     *  - User cancelled: `status` = 'CANCELLED', message reflects user cancellation
+     *  - DCC detected: `dcc` array is populated with `amount`, `currency`, `markup`, and `rate`
+     *  - Success message types (see `self::SUCCESS_MESSAGE_TYPES`):
+     *      - Fingerprint matches: `status` = 'SUCCESS', `success` = true
+     *      - Fingerprint mismatch: `status` = 'INVALID_FINGERPRINT', includes debug info
+     *  - Other cases: Uses `merchantRespErrorDescription` and `merchantRespErrorDetail` if provided
+     *
+     * @param array $postData The POST data returned by Vinti4Pay for the payment
+     *
+     * @return ResponseResult Structured result containing status, message, success flag, DCC info, original data, and debug info
+     */
+
     public function processPaymentResponse(array $postData): ResponseResult
     {
         $result = [
@@ -330,6 +408,31 @@ class Vinti4Pay
     // -------------------------
     // 🧾 Process Refund Response
     // -------------------------
+
+    /**
+     * Processes the refund response from Vinti4Pay.
+     *
+     * This method validates the refund response data, checks the message type,
+     * verifies the fingerprint if applicable, and returns a structured result.
+     *
+     * The returned `ResponseResult` contains:
+     *  - `status`: Status code ('SUCCESS', 'ERROR', 'INVALID_FINGERPRINT', etc.)
+     *  - `message`: Human-readable message (based on language or server response)
+     *  - `success`: Boolean indicating if the refund was successfully processed
+     *  - `data`: Original POST data
+     *  - `debug`: Optional debug information (e.g., fingerprint comparison)
+     *
+     * Behavior by messageType:
+     *  - null: No response from server (timeout or network issue)
+     *  - '6': Error response from merchant, includes `merchantRespErrorDescription` and `merchantRespErrorDetail`
+     *  - '10': Successful refund, fingerprint is validated
+     *  - other: Unexpected messageType, treated as an error
+     *
+     * @param array $postData The POST data returned by Vinti4Pay for the refund
+     *
+     * @return ResponseResult Structured result containing status, message, success flag, original data, and debug info
+     */
+
     public function processRefundResponse(array $postData): ResponseResult
     {
         $result = [

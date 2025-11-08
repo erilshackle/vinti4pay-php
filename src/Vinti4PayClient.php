@@ -2,10 +2,10 @@
 
 namespace Erilshk\Vinti4Pay;
 
+use Erilshk\Vinti4Pay\Vinti4Pay;
 use Erilshk\Vinti4Pay\Exceptions\Vinti4Exception;
 use Erilshk\Vinti4Pay\Models\Receipt;
 use Erilshk\Vinti4Pay\Models\ResponseResult;
-
 
 
 /**
@@ -137,7 +137,8 @@ class Vinti4PayClient
             throw new Vinti4Exception("Invalid email.");
         }
 
-        $addrMatch = in_array(strtoupper($aditional['addrMatch'] ?? 'N'), ['Y', 'N']) ? strtoupper($aditional['addrMatch']) : 'N';
+        $addrMatch = strtoupper($aditional['addrMatch'] ?? '');
+        $addrMatch = in_array($addrMatch, ['Y', 'N']) ? $addrMatch : 'N';
 
         $billing = [
             'billAddrCountry' => $country,
@@ -196,12 +197,24 @@ class Vinti4PayClient
     /**
      * Set additional optional parameters for the transaction.
      *
-     * Only keys defined in $allowedParams are permitted.
+     * Only keys defined in `$allowedParams` are permitted.
+     *
+     * Allowed parameters:
+     *  - `currency` *(string|int)*: ISO4217 currency code or internal code (converted via `currencyToCode`)
+     *  - `languageMessages` *(string)*: Language for messages (`pt` or `en`)
+     *  - `entityCode` *(string)*: Entity code for service payments
+     *  - `referenceNumber` *(string)*: Reference number for service payments
+     *  - `merchantRef` *(string)*: Internal merchant reference
+     *  - `merchantSession` *(string)*: Internal merchant session identifier
+     *  - `addrMatch` *(bool|string)*: Optional address matching flag
+     *  - `purchaseRequest` *(array)*: Optional 3DS purchase request data
+     *  - `user` *(array|string)*: Optional user information
      *
      * @param array<string, mixed> $params Key-value pairs of optional parameters
-     * @return static Current instance for chaining
-     * @throws Vinti4Exception If a key is not allowed
+     * @return static Current instance for method chaining
+     * @throws Vinti4Exception If a parameter key is not allowed
      */
+
     public function setRequestParams(array $params): static
     {
         foreach ($params as $k => $v) {
@@ -346,7 +359,31 @@ class Vinti4PayClient
      * Must be called **after** one of the `prepare*` methods (`preparePurchase`, `prepareServicePayment`,
      * `prepareRecharge`, `prepareRefund`). Returns an HTML form ready for automatic submission to Vinti4Net,
      * including fingerprint and timestamp.
+     *  
      *
+     * Example usage:
+     *
+     * Example usage:
+     *
+     * ```php
+     * # Create client
+     * $vinti4Pay = new Vinti4PayClient($posID, $authCode);
+     *
+     * # Prepare a purchase
+     * $billing = [
+     *     'billAddrCountry' => 'CV',
+     *     'billAddrCity' => 'Praia',
+     *     'billAddrLine1' => 'Av. Principal 10',
+     *     'billAddrPostCode' => '7600',
+     *     'email' => 'customer@email.cv'
+     * ];
+     *
+     * $vinti4Pay->preparePurchase(1500.00, $billing);
+     *
+     * # Generate HTML form for submission
+     * $htmlForm = $vinti4Pay->createPaymentForm('https://mysite.cv/vinti4/callback');
+     * echo $htmlForm;
+     * ```
      * @param string $responseUrl Merchant callback URL
      * @param string $language Language for messages ('pt' or 'en')
      * @return string HTML form ready to submit
@@ -368,16 +405,45 @@ class Vinti4PayClient
 
 
     /**
-     * Processes and validates the callback response from Vinti4Net, bing wither Payment or refund.
+     * Processes and validates the callback response from Vinti4Net (either payment or refund).
      *
-     * Delegates the processing to the underlying SDK instance.
-     * Validates the fingerprint, checks for user cancellation, success status,
-     * and parses DCC data if available.
+     * This method delegates the actual processing to the underlying SDK instance.
+     * It automatically determines whether the response is a refund or a standard payment
+     * and calls the appropriate handler (`processRefundResponse` or `processPaymentResponse`).
      *
-     * @param array $postData The POST data received from Vinti4Net callback (usually $_POST)
-     * @return ResponseResult An object containing the status, success flag, message, original data, and any DCC info
+     * The response is validated for:
+     *  - Fingerprint correctness
+     *  - User cancellation
+     *  - Success status
+     *  - Optional DCC (Dynamic Currency Conversion) data
+     *
+     * @param array $postData The POST data received from Vinti4Net callback (usually `$_POST`)
+     *
+     * @return ResponseResult An object containing:
+     *  - `status`: Status code ('SUCCESS', 'ERROR', 'CANCELLED', 'INVALID_FINGERPRINT', etc.)
+     *  - `message`: Human-readable message
+     *  - `success`: Boolean indicating if the transaction was successful
+     *  - `data`: Original POST data
+     *  - `dcc` (optional): DCC information if available
+     *  - `debug` (optional): Debug information (e.g., fingerprint comparison)
+     *
      * @throws Vinti4Exception If the response is invalid or cannot be processed
+     *
+     * Example usage:
+     *
+     * ```php
+     * $postData = $_POST; // Data from Vinti4Net callback
+     *
+     * $responseResult = $vinti4Pay->processResponse($postData);
+     *
+     * if ($responseResult->isSuccessful()) {
+     *     echo "Transaction successful: " . $responseResult->status;
+     * } else {
+     *     echo "Transaction failed: " . $responseResult->message;
+     * }
+     * ```
      */
+
     public function processResponse(array $postData): ResponseResult
     {
         // Determina o SDK correto

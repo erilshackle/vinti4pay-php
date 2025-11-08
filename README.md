@@ -42,7 +42,7 @@ require 'path/to/Vinti4PayClient.php';
 $vinti4 = new Vinti4PayClient('SEU_POS_ID', 'SEU_POS_AUTHCODE');
 ```
 
-[Download Vinti4Pay]()
+[Download Vinti4Pay](https://raw.githubusercontent.com/erilshackle/vinti4pay-php/refs/heads/main/dist/Vinti4PayClient.php)
 
 ---
 

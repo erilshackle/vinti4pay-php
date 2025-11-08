@@ -5,7 +5,7 @@ namespace Erilshk\Vinti4Pay\Tests\Traits;
 use Erilshk\Vinti4Pay\Traits\ReceiptGeneretorTrait;
 use PHPUnit\Framework\TestCase;
 
-class ReceiptGeneratorTraitTest extends TestCase
+class ReceiptGeneretorTraitTest extends TestCase
 {
     use ReceiptGeneretorTrait;
 

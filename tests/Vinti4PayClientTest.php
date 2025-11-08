@@ -1,6 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use Erilshk\Vinti4Pay\Vinti4Pay;
 use Erilshk\Vinti4Pay\Vinti4PayClient;
 use Erilshk\Vinti4Pay\Exceptions\Vinti4Exception;
 use Erilshk\Vinti4Pay\Models\ResponseResult;
@@ -112,7 +113,7 @@ class Vinti4PayClientTest extends TestCase
     public function testCreatePaymentFormCallsSdkMethods()
     {
         // Cria um mock do SDK
-        $sdkMock = $this->createMock(\Erilshk\Vinti4Pay\Vinti4Pay::class);
+        $sdkMock = $this->createMock(Vinti4Pay::class);
         $sdkMock->expects($this->once())
             ->method('preparePayment')
             ->willReturn(['prepared' => true]);
@@ -198,7 +199,7 @@ class Vinti4PayClientTest extends TestCase
 
     public function testProcessResponseCallsProcessPaymentResponse()
     {
-        $sdkMock = $this->createMock(\Erilshk\Vinti4Pay\Vinti4Pay::class);
+        $sdkMock = $this->createMock(Vinti4Pay::class);
         $mockResult = $this->createMock(ResponseResult::class);
         $sdkMock->expects($this->once())
             ->method('processPaymentResponse')
@@ -216,7 +217,7 @@ class Vinti4PayClientTest extends TestCase
 
     public function testProcessResponseCallsProcessRefundResponse()
     {
-        $sdkMock = $this->createMock(\Erilshk\Vinti4Pay\Vinti4Pay::class);
+        $sdkMock = $this->createMock(Vinti4Pay::class);
         $mockResult = $this->createMock(ResponseResult::class);
         $sdkMock->expects($this->once())
             ->method('processRefundResponse')
@@ -229,7 +230,7 @@ class Vinti4PayClientTest extends TestCase
         $prop->setValue($client, $sdkMock);
 
         // Qualquer uma dessas condições deve acionar refund
-        $result = $client->processResponse(['transactionCode' => \Erilshk\Vinti4Pay\Vinti4Pay::TRANSACTION_TYPE_REFUND]);
+        $result = $client->processResponse(['transactionCode' => Vinti4Pay::TRANSACTION_TYPE_REFUND]);
         $this->assertInstanceOf(ResponseResult::class, $result);
     }
 
