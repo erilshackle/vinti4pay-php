@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Eril TS Carvalho" /><link rel="canonical" href="https://github.com/erilshackle/vinti4pay-php/standalone/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Vint4PayClient - Vinti4Pay PHP SDK</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Vint4PayClient";
+        var mkdocs_page_input_path = "standalone\\index.md";
+        var mkdocs_page_url = "/erilshackle/vinti4pay-php/standalone/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Vinti4Pay PHP SDK
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introdução</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../installation/">Instalação</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../setup/">Configuração</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../usage/">Uso</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../callbacks/">Callbacks e Respostas</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../receipt/">Recibo</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../examples/">Exemplos</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Referência</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../reference/">API Detalhada</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../api/">Documentor</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standalone Class</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Vint4PayClient</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#visao-geral">🌍 Visão Geral</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#requisitos">⚙️ Requisitos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#instalacao">📦 Instalação</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#fluxo-geral-de-integracao">🔄 Fluxo Geral de Integração</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#exemplo-completo">💡 Exemplo Completo</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#postbackphp">postback.php</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#callbackphp">callback.php</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#documentacao-da-classe">📘 Documentação da Classe</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#construtor">🔹 Construtor</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#setrequestparams">🔹 setRequestParams()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#preparepurchase">🔹 preparePurchase()</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#estrutura-de-billing">Estrutura de $billing:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#prepareservicepayment">🔹 prepareServicePayment()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#preparerecharge">🔹 prepareRecharge()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#preparerefund">🔹 prepareRefund()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#createpaymentform">🔹 createPaymentForm()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#processresponse">🔹 processResponse()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#constantes-importantes">🧩 Constantes Importantes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#erros-comuns">⚠️ Erros Comuns</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#boas-praticas">🧠 Boas Práticas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#licenca">📄 Licença</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Changelogs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../changelog/">Changelog</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Vinti4Pay PHP SDK</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Standalone Class</li>
+      <li class="breadcrumb-item active">Vint4PayClient</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/erilshackle/vinti4pay-php/edit/master/docs/standalone/index.md">Edit on erilshackle/vinti4pay-php</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="vinti4payclient-standalone-integracao-de-pagamentos-vinti4net-sisp-php">💳 Vinti4PayClient Standalone — Integração de Pagamentos Vinti4Net - SISP (PHP)<a class="headerlink" href="#vinti4payclient-standalone-integracao-de-pagamentos-vinti4net-sisp-php" title="Permanent link">&para;</a></h1>
+<p>Cliente standalone para integração com o gateway de pagamentos <strong>Vinti4 (SISP Cabo Verde)</strong>.</p>
+<hr />
+<h2 id="visao-geral">🌍 Visão Geral<a class="headerlink" href="#visao-geral" title="Permanent link">&para;</a></h2>
+<p>A classe <code>Vinti4PayClient</code> encapsula o processo de comunicação com o gateway de pagamentos <strong>Vinti4</strong> (mantido pela SISP, Cabo Verde).
+Ela permite que comerciantes criem pagamentos online de forma <strong>segura e validada criptograficamente</strong> com <strong>fingerprints SHA-512</strong>.</p>
+<p>Suporta os seguintes tipos de operação:</p>
+<table>
+<thead>
+<tr>
+<th>Tipo de Transação</th>
+<th>Constante</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compra</td>
+<td><code>TRANSACTION_TYPE_PURCHASE</code></td>
+<td>Pagamento comum com cartão</td>
+</tr>
+<tr>
+<td>Pagamento de Serviço</td>
+<td><code>TRANSACTION_TYPE_SERVICE_PAYMENT</code></td>
+<td>Ex: água, luz, etc.</td>
+</tr>
+<tr>
+<td>Recarga</td>
+<td><code>TRANSACTION_TYPE_RECHARGE</code></td>
+<td>Ex: carregamento de telemóvel</td>
+</tr>
+<tr>
+<td>Reembolso</td>
+<td><code>TRANSACTION_TYPE_REFUND</code></td>
+<td>Devolução de valor ao cliente</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="requisitos">⚙️ Requisitos<a class="headerlink" href="#requisitos" title="Permanent link">&para;</a></h2>
+<ul>
+<li>PHP <strong>8.1+</strong></li>
+<li>Extensão <code>bcmath</code></li>
+<li>Extensão <code>ext-hash</code></li>
+<li>Extensão <code>ext-json</code></li>
+<li>Servidor HTTPS (obrigatório para produção)</li>
+</ul>
+<hr />
+<h2 id="instalacao">📦 Instalação<a class="headerlink" href="#instalacao" title="Permanent link">&para;</a></h2>
+<p>Basta incluir a classe no seu projeto:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">require_once &#39;Vinti4PayClient.php&#39;;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="fluxo-geral-de-integracao">🔄 Fluxo Geral de Integração<a class="headerlink" href="#fluxo-geral-de-integracao" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Inicie o cliente:</strong></li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="x">$client = new Vinti4PayClient($posID, $posAuthCode);</span>
+</code></pre></div>
+
+<ol>
+<li><strong>Prepare a transação:</strong></li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="x">$client-&gt;preparePurchase(1500.00, $billingData, &#39;ORDER123&#39;);</span>
+
+<span class="x">// $client-&gt;prepareServicePayment(1500.00, $entity, $reference, &#39;FAT123&#39;);</span>
+<span class="x">// $client-&gt;prepareRecharge(1500.00, $entity, $number, &#39;R123&#39;);</span>
+</code></pre></div>
+
+<blockquote>
+<p>💡 Só se pode preparar um tipo de transação!</p>
+</blockquote>
+<ol>
+<li><strong>Gere o formulário HTML de redirecionamento:</strong></li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="x">echo $client-&gt;createPaymentForm(&#39;https://seusite.com/callback.php&#39;);</span>
+</code></pre></div>
+
+<ol>
+<li><strong>Receba e processe o retorno:</strong></li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="x">$result = $client-&gt;processResponse($_POST);</span>
+</code></pre></div>
+
+<ol>
+<li><strong>Valide o resultado:</strong></li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="x">if ($result[&#39;success&#39;]) {</span>
+<span class="x">    // Pagamento aprovado</span>
+<span class="x">} else {</span>
+<span class="x">    // Erro, cancelamento ou fraude</span>
+<span class="x">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="exemplo-completo">💡 Exemplo Completo<a class="headerlink" href="#exemplo-completo" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="x">// Para previnir cache de resultados o que pode gerar problemas, desabilite o cache da pagina:</span>
+<span class="x">header(&quot;Cache-Control: no-store, no-cache, must-revalidate, max-age=0&quot;);</span>
+<span class="x">header(&quot;Cache-Control: post-check=0, pre-check=0&quot;, false);</span>
+<span class="x">header(&quot;Pragma: no-cache&quot;);</span>
+</code></pre></div>
+
+<h3 id="postbackphp">postback.php<a class="headerlink" href="#postbackphp" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span>
+<span class="k">require_once</span> <span class="s1">&#39;Vinti4PayClient.php&#39;</span><span class="p">;</span>
+
+<span class="nv">$posID</span> <span class="o">=</span> <span class="s1">&#39;123456&#39;</span><span class="p">;</span>
+<span class="nv">$posAuthCode</span> <span class="o">=</span> <span class="s1">&#39;SEU_AUTH_CODE&#39;</span><span class="p">;</span>
+
+<span class="c1">// Inicializa o cliente</span>
+<span class="nv">$vinti4</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vinti4PayClient</span><span class="p">(</span><span class="nv">$posID</span><span class="p">,</span> <span class="nv">$posAuthCode</span><span class="p">);</span>
+
+<span class="c1">// Dados de faturamento</span>
+<span class="nv">$billing</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;billAddrCountry&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CV&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;billAddrCity&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Praia&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;billAddrLine1&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Av. Cidade Lisboa&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;billAddrPostCode&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;7600&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cliente@exemplo.cv&#39;</span>
+<span class="p">];</span>
+
+<span class="c1">// Prepara a compra</span>
+<span class="nv">$vinti4</span><span class="o">-&gt;</span><span class="na">preparePurchase</span><span class="p">(</span><span class="mf">2500.00</span><span class="p">,</span> <span class="nv">$billing</span><span class="p">,</span> <span class="s1">&#39;ORDER-2025-001&#39;</span><span class="p">);</span>
+
+<span class="c1">// Define parâmetros opcionais</span>
+<span class="nv">$vinti4</span><span class="o">-&gt;</span><span class="na">setRequestParams</span><span class="p">([</span>
+    <span class="s1">&#39;currency&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CVE&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;languageMessages&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;pt&#39;</span>
+<span class="p">]);</span>
+
+<span class="c1">// Gera e envia o formulário</span>
+<span class="k">echo</span> <span class="nv">$vinti4</span><span class="o">-&gt;</span><span class="na">createPaymentForm</span><span class="p">(</span><span class="s1">&#39;https://meusite.cv/retorno.php&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<h3 id="callbackphp">callback.php<a class="headerlink" href="#callbackphp" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span>
+<span class="k">require_once</span> <span class="s1">&#39;Vinti4PayClient.php&#39;</span><span class="p">;</span>
+
+<span class="nv">$posID</span> <span class="o">=</span> <span class="s1">&#39;123456&#39;</span><span class="p">;</span>
+<span class="nv">$posAuthCode</span> <span class="o">=</span> <span class="s1">&#39;SEU_AUTH_CODE&#39;</span><span class="p">;</span>
+
+<span class="c1">// Inicializa o cliente</span>
+<span class="nv">$vinti4</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vinti4PayClient</span><span class="p">(</span><span class="nv">$posID</span><span class="p">,</span> <span class="nv">$posAuthCode</span><span class="p">);</span>
+
+<span class="nv">$vinti4</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vinti4PayClient</span><span class="p">(</span><span class="nv">$posID</span><span class="p">,</span> <span class="nv">$posAuthCode</span><span class="p">);</span>
+<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$vinti4</span><span class="o">-&gt;</span><span class="na">processResponse</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">])</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Pagamento confirmado!&quot;</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Falha: &quot;</span> <span class="o">.</span> <span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="documentacao-da-classe">📘 Documentação da Classe<a class="headerlink" href="#documentacao-da-classe" title="Permanent link">&para;</a></h2>
+<hr />
+<h3 id="construtor">🔹 Construtor<a class="headerlink" href="#construtor" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">__construct(string $posID, string $posAuthCode, ?string $endpoint = null)</span>
+</code></pre></div>
+
+<p><strong>Descrição:</strong>
+Inicializa o cliente com as credenciais fornecidas pelo <strong>SISP</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>Tipo</th>
+<th>Descrição</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$posID</code></td>
+<td>string</td>
+<td>Identificador do POS fornecido pelo Vinti4.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>$posAuthCode</code></td>
+<td>string</td>
+<td>Código de autenticação do POS.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>$endpoint</code></td>
+<td>string</td>
+<td>null</td>
+<td>Endpoint do gateway. Padrão: <code>https://mc.vinti4net.cv/BizMPIOnUsSisp/CardPayment</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="setrequestparams">🔹 <code>setRequestParams()</code><a class="headerlink" href="#setrequestparams" title="Permanent link">&para;</a></h3>
+<p>Define parâmetros opcionais da requisição antes de criar o formulário.</p>
+<div class="codehilite"><pre><span></span><code><span class="x">setRequestParams(array $params): static</span>
+</code></pre></div>
+
+<p><strong>Parâmetros permitidos:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>currency</code></td>
+<td>string</td>
+<td>int</td>
+</tr>
+<tr>
+<td><code>languageMessages</code></td>
+<td>string</td>
+<td>Idioma das mensagens retornadas (<code>pt</code>, <code>en</code>, etc.)</td>
+</tr>
+<tr>
+<td><code>entityCode</code></td>
+<td>string</td>
+<td>Código da entidade (para pagamentos de serviço ou recarga)</td>
+</tr>
+<tr>
+<td><code>referenceNumber</code></td>
+<td>string</td>
+<td>Referência do pagamento</td>
+</tr>
+<tr>
+<td><code>merchantRef</code></td>
+<td>string</td>
+<td>Código interno da transação</td>
+</tr>
+<tr>
+<td><code>merchantSession</code></td>
+<td>string</td>
+<td>Sessão única da transação</td>
+</tr>
+<tr>
+<td><code>addrMatch</code></td>
+<td>string</td>
+<td><code>'Y'</code> se o endereço de entrega for igual ao de faturamento</td>
+</tr>
+<tr>
+<td><code>purchaseRequest</code></td>
+<td>string</td>
+<td>JSON codificado da compra, normalmente gerado internamente</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="preparepurchase">🔹 <code>preparePurchase()</code><a class="headerlink" href="#preparepurchase" title="Permanent link">&para;</a></h3>
+<p>Prepara uma <strong>transação de compra (Purchase)</strong>.</p>
+<div class="codehilite"><pre><span></span><code><span class="x">preparePurchase(float|string $amount, array $billing, ?string $merchantRef = null, ?string $merchantSession = null): static</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>Tipo</th>
+<th>Descrição</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$amount</code></td>
+<td>float</td>
+<td>string</td>
+<td>Valor da compra.</td>
+</tr>
+<tr>
+<td><code>$billing</code></td>
+<td>array</td>
+<td>Dados de faturamento obrigatórios.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>$merchantRef</code></td>
+<td>string</td>
+<td>null</td>
+<td>Referência do comerciante.</td>
+</tr>
+<tr>
+<td><code>$merchantSession</code></td>
+<td>string</td>
+<td>null</td>
+<td>Sessão da transação.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="estrutura-de-billing">Estrutura de <code>$billing</code>:<a class="headerlink" href="#estrutura-de-billing" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Obrigatório</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>billAddrCountry</code></td>
+<td>✅</td>
+<td>País (ex: <code>CV</code>)</td>
+</tr>
+<tr>
+<td><code>billAddrCity</code></td>
+<td>✅</td>
+<td>Cidade</td>
+</tr>
+<tr>
+<td><code>billAddrLine1</code></td>
+<td>✅</td>
+<td>Endereço</td>
+</tr>
+<tr>
+<td><code>billAddrPostCode</code></td>
+<td>✅</td>
+<td>Código postal</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>✅</td>
+<td>E-mail do cliente</td>
+</tr>
+<tr>
+<td><code>addrMatch</code></td>
+<td>❌</td>
+<td><code>'Y'</code> se endereço de entrega = faturamento</td>
+</tr>
+<tr>
+<td><code>shipAddrCountry</code>, <code>shipAddrCity</code>, <code>shipAddrLine1</code>, <code>shipAddrPostCode</code></td>
+<td>❌</td>
+<td>Endereço de entrega (opcional)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="prepareservicepayment">🔹 <code>prepareServicePayment()</code><a class="headerlink" href="#prepareservicepayment" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">prepareServicePayment(float|string $amount, string $entity, string $reference, ?string $merchantRef = null, ?string $merchantSession = null): static</span>
+</code></pre></div>
+
+<p>Prepara um <strong>pagamento de serviço</strong> (Ex: contas de luz, água, etc.)</p>
+<hr />
+<h3 id="preparerecharge">🔹 <code>prepareRecharge()</code><a class="headerlink" href="#preparerecharge" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">prepareRecharge(float|string $amount, string $entity, string $number, ?string $merchantRef = null, ?string $merchantSession = null): static</span>
+</code></pre></div>
+
+<p>Prepara uma <strong>recarga</strong> (Ex: telemóvel).</p>
+<hr />
+<h3 id="preparerefund">🔹 <code>prepareRefund()</code><a class="headerlink" href="#preparerefund" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">prepareRefund(float|string $amount, string $merchantRef, string $merchantSession, string $transactionID, string $clearingPeriod): static</span>
+</code></pre></div>
+
+<p>Prepara uma operação de <strong>reembolso</strong>.</p>
+<hr />
+<h3 id="createpaymentform">🔹 <code>createPaymentForm()</code><a class="headerlink" href="#createpaymentform" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">createPaymentForm(string $responseUrl, string $redirectMessage = &quot;Processando o pagamento...&quot;): string</span>
+</code></pre></div>
+
+<p>Gera o <strong>HTML de redirecionamento automático</strong> para o gateway.</p>
+<hr />
+<h3 id="processresponse">🔹 <code>processResponse()</code><a class="headerlink" href="#processresponse" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">processResponse(array $postData): array</span>
+</code></pre></div>
+
+<p>Processa e valida a resposta enviada pelo <strong>Vinti4</strong> após o pagamento.</p>
+<p>Verifica:</p>
+<ul>
+<li>Cancelamento pelo usuário</li>
+<li>Tipo de transação (pagamento/refund)</li>
+<li>Cálculo do fingerprint</li>
+<li>Verificação de DCC</li>
+<li>Retorno de mensagens e erros</li>
+</ul>
+<p><strong>Retorno:</strong>
+Array com:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">[</span>
+<span class="x">  &#39;status&#39; =&gt; &#39;SUCCESS|CANCELLED|INVALID_FINGERPRINT|ERROR&#39;,</span>
+<span class="x">  &#39;message&#39; =&gt; &#39;...&#39;,</span>
+<span class="x">  &#39;success&#39; =&gt; true|false,</span>
+<span class="x">  &#39;data&#39; =&gt; [...],</span>
+<span class="x">  &#39;dcc&#39; =&gt; [...],</span>
+<span class="x">  &#39;debug&#39; =&gt; [...],</span>
+<span class="x">  &#39;detail&#39; =&gt; &#39;...&#39;</span>
+<span class="x">]</span>
+</code></pre></div>
+
+<hr />
+<h2 id="constantes-importantes">🧩 Constantes Importantes<a class="headerlink" href="#constantes-importantes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Constante</th>
+<th>Valor</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DEFAULT_ENDPOINT</code></td>
+<td><code>https://mc.vinti4net.cv/BizMPIOnUsSisp/CardPayment</code></td>
+<td>Endpoint padrão do gateway</td>
+</tr>
+<tr>
+<td><code>TRANSACTION_TYPE_PURCHASE</code></td>
+<td><code>'1'</code></td>
+<td>Compra</td>
+</tr>
+<tr>
+<td><code>TRANSACTION_TYPE_SERVICE_PAYMENT</code></td>
+<td><code>'2'</code></td>
+<td>Pagamento de serviço</td>
+</tr>
+<tr>
+<td><code>TRANSACTION_TYPE_RECHARGE</code></td>
+<td><code>'3'</code></td>
+<td>Recarga</td>
+</tr>
+<tr>
+<td><code>TRANSACTION_TYPE_REFUND</code></td>
+<td><code>'4'</code></td>
+<td>Reembolso</td>
+</tr>
+<tr>
+<td><code>CURRENCY_CVE</code></td>
+<td><code>'132'</code></td>
+<td>Código CVE</td>
+</tr>
+<tr>
+<td><code>SUCCESS_MESSAGE_TYPES</code></td>
+<td><code>['8', '10', 'P', 'M']</code></td>
+<td>Mensagens que indicam sucesso</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="erros-comuns">⚠️ Erros Comuns<a class="headerlink" href="#erros-comuns" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Situação</th>
+<th>Causa</th>
+<th>Solução</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Já existe uma transação configurada neste objeto.</code></td>
+<td>Você chamou <code>preparePurchase()</code> duas vezes sem resetar</td>
+<td>Crie nova instância para cada transação</td>
+</tr>
+<tr>
+<td><code>Invalid currency code</code></td>
+<td>Código de moeda inválido</td>
+<td>Use sigla ISO (<code>CVE</code>, <code>EUR</code>, etc.)</td>
+</tr>
+<tr>
+<td><code>INVALID_FINGERPRINT</code></td>
+<td>Fingerprint divergente</td>
+<td>Verifique se <code>$posAuthCode</code> é o mesmo do ambiente (produção/homologação)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="boas-praticas">🧠 Boas Práticas<a class="headerlink" href="#boas-praticas" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Gere sempre novas referências (<code>merchantRef</code>, <code>merchantSession</code>) por transação.</li>
+<li>Use HTTPS no <code>responseUrl</code>.</li>
+<li>Armazene logs de retorno (<code>$_POST</code>) para auditoria.</li>
+<li>Nunca exponha o <code>posAuthCode</code> em JavaScript ou cliente final.</li>
+</ul>
+<hr />
+<h2 id="licenca">📄 Licença<a class="headerlink" href="#licenca" title="Permanent link">&para;</a></h2>
+<p>Código livre para uso interno ou comercial.
+Distribuído sob a licença <strong>MIT</strong>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../reference/" class="btn btn-neutral float-left" title="API Detalhada"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../changelog/" class="btn btn-neutral float-right" title="Changelog">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/erilshackle/vinti4pay-php" class="fa fa-code-fork" style="color: #fcfcfc"> erilshackle/vinti4pay-php</a>
+        </span>
+    
+    
+      <span><a href="../reference/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../changelog/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

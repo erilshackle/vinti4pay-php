@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="SDK PHP para integração com a plataforma Vinti4Net de Cabo Verde (SISP - Transactions, Refunds, DCC e Secure)." /><meta name="author" content="Eril TS Carvalho" /><link rel="canonical" href="https://github.com/erilshackle/vinti4pay-php/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Vinti4Pay PHP SDK</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Introdu\u00e7\u00e3o";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = "/erilshackle/vinti4pay-php/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> Vinti4Pay PHP SDK
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Introdução</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#recursos-principais">✨ Recursos Principais</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#detalhes-tecnicos">📦 Detalhes Técnicos</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#requisitos-de-ambiente">🛠️ Requisitos de Ambiente</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#proximos-passos">🚀 Próximos Passos</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#suporte-e-contato">🌐 Suporte e Contato</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="installation/">Instalação</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="setup/">Configuração</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="usage/">Uso</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="callbacks/">Callbacks e Respostas</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="receipt/">Recibo</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="examples/">Exemplos</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Referência</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="reference/">API Detalhada</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="api/">Documentor</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standalone Class</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="standalone/">Vint4PayClient</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Changelogs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="changelog/">Changelog</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">Vinti4Pay PHP SDK</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Introdução</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/erilshackle/vinti4pay-php/edit/master/docs/index.md">Edit on erilshackle/vinti4pay-php</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="vinti4pay-php-sdk">Vinti4Pay PHP SDK<a class="headerlink" href="#vinti4pay-php-sdk" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>erilshk/vinti4pay-php</strong> - SDK PHP para integração simples e segura com a plataforma <strong>Vinti4Net</strong> de Cabo Verde (SISP).</p>
+</blockquote>
+<p>Este SDK foi desenvolvido para facilitar a comunicação do seu projeto PHP com o gateway de pagamentos <strong>Vinti4Net</strong>, que opera a rede SISP em Cabo Verde. Ele abstrai as complexidades de segurança (como a geração de <em>fingerprint</em>) e formatação de requisições, permitindo que você se concentre na lógica de negócios do seu aplicativo.</p>
+<hr />
+<h2 id="recursos-principais">✨ Recursos Principais<a class="headerlink" href="#recursos-principais" title="Permanent link">&para;</a></h2>
+<p>O <code>Vinti4PayClient</code> é o ponto de entrada principal, oferecendo métodos claros e encadeáveis para gerenciar o ciclo de vida de uma transação:</p>
+<ul>
+<li><strong>Tipos de Transação Suportados:</strong><ul>
+<li><strong>Compras</strong> (Purchase)</li>
+<li><strong>Pagamentos de Serviços</strong> (Service Payment)</li>
+<li><strong>Recargas</strong> (Recharge)</li>
+<li><strong>Estornos</strong> (Refunds)</li>
+</ul>
+</li>
+<li><strong>Geração de Formulários:</strong> Criação automática de formulários HTML, prontos para a submissão ao gateway, incluindo todos os campos de segurança necessários.</li>
+<li><strong>Processamento de <em>Callback</em>:</strong> Validação e interpretação robusta das respostas (<em>callbacks</em>) enviadas pelo Vinti4Net, diferenciando automaticamente entre respostas de Pagamento e Estorno.</li>
+<li><strong>Gestão de Dados:</strong> Métodos dedicados para definir dados de <em>billing</em> obrigatórios de forma validada (<code>setBillingParams</code>).</li>
+<li><strong>DCC e Secure:</strong> Suporte implícito para as funcionalidades de <em>Dynamic Currency Conversion</em> (DCC) e transações 3D Secure.</li>
+</ul>
+<hr />
+<h2 id="detalhes-tecnicos">📦 Detalhes Técnicos<a class="headerlink" href="#detalhes-tecnicos" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Detalhe</th>
+<th style="text-align: left;">Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Pacote Composer</strong></td>
+<td style="text-align: left;"><code>erilshk/vinti4pay-php</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Licença</strong></td>
+<td style="text-align: left;">MIT</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Namespace Principal</strong></td>
+<td style="text-align: left;"><code>Erilshk\Vinti4Pay</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Classe Central</strong></td>
+<td style="text-align: left;"><code>Vinti4PayClient</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="requisitos-de-ambiente">🛠️ Requisitos de Ambiente<a class="headerlink" href="#requisitos-de-ambiente" title="Permanent link">&para;</a></h3>
+<p>Para rodar o SDK, seu ambiente deve atender aos seguintes requisitos:</p>
+<ul>
+<li><strong>PHP:</strong> Versão <code>8.0</code> ou superior.</li>
+<li><strong>Extensões PHP:</strong> <code>ext-json</code> e <code>ext-hash</code>.</li>
+</ul>
+<blockquote>
+<p><strong>Nota:</strong> É altamente recomendável manter seu ambiente PHP atualizado para a melhor performance e segurança.</p>
+</blockquote>
+<hr />
+<h2 id="proximos-passos">🚀 Próximos Passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h2>
+<p>Aprenda a integrar o SDK em seu projeto em apenas alguns passos:</p>
+<ol>
+<li><strong><a href="installation/">Instalação</a>:</strong> Adicione a dependência ao seu projeto via Composer.</li>
+<li><strong><a href="setup/">Configuração</a>:</strong> Instancie o <code>Vinti4PayClient</code> com suas credenciais de POS.</li>
+<li><strong><a href="usage/">Uso</a>:</strong> Veja como preparar suas primeiras transações de pagamento.</li>
+</ol>
+<hr />
+<h3 id="suporte-e-contato">🌐 Suporte e Contato<a class="headerlink" href="#suporte-e-contato" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Repositório:</strong> <a href="https://github.com/erilshackle/vinti4pay-php">erilshackle/vinti4pay-php</a></li>
+<li><strong>Relatar Problemas (Issues):</strong> <a href="https://github.com/erilshackle/vinti4pay-php/issues">erilshackle/vinti4pay-php/issues</a></li>
+<li><strong>Autor:</strong> Eril TS Carvalho</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="installation/" class="btn btn-neutral float-right" title="Instalação">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/erilshackle/vinti4pay-php" class="fa fa-code-fork" style="color: #fcfcfc"> erilshackle/vinti4pay-php</a>
+        </span>
+    
+    
+    
+      <span><a href="installation/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2025-11-08 21:16:58.943524+00:00
+-->

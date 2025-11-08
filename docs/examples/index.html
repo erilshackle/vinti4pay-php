@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Eril TS Carvalho" /><link rel="canonical" href="https://github.com/erilshackle/vinti4pay-php/examples/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Exemplos - Vinti4Pay PHP SDK</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Exemplos";
+        var mkdocs_page_input_path = "examples.md";
+        var mkdocs_page_url = "/erilshackle/vinti4pay-php/examples/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Vinti4Pay PHP SDK
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introdução</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../installation/">Instalação</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../setup/">Configuração</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../usage/">Uso</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../callbacks/">Callbacks e Respostas</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../receipt/">Recibo</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Exemplos</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#configuracao-env">📝 Configuração: .env</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#arquivo-1-checkouthtml-pagina-de-recolha-de-dados">Arquivo 1: checkout.html (Página de Recolha de Dados)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#arquivo-2-postbackphp-o-script-de-processamento-interno">Arquivo 2: postback.php (O Script de Processamento Interno)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#arquivo-3-vinti4_callbackphp-o-script-de-callbackresposta">Arquivo 3: vinti4_callback.php (O Script de Callback/Resposta)</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Referência</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../reference/">API Detalhada</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../api/">Documentor</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standalone Class</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../standalone/">Vint4PayClient</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Changelogs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../changelog/">Changelog</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Vinti4Pay PHP SDK</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Exemplos</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/erilshackle/vinti4pay-php/edit/master/docs/examples.md">Edit on erilshackle/vinti4pay-php</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="exemplo-de-fluxo-de-compra-completo-3-arquivos">🛍️ Exemplo de Fluxo de Compra Completo (3 Arquivos)<a class="headerlink" href="#exemplo-de-fluxo-de-compra-completo-3-arquivos" title="Permanent link">&para;</a></h2>
+<p>Este conjunto de exemplos simula o ciclo completo de uma transação de <strong>Compra</strong> (<code>preparePurchase</code>), desde o <em>checkout</em> inicial até o <em>callback</em> final.</p>
+<h3 id="configuracao-env">📝 Configuração: <code>.env</code><a class="headerlink" href="#configuracao-env" title="Permanent link">&para;</a></h3>
+<p>Recomenda-se o uso de um arquivo de <code>config</code> ou, preferencialmente, <code>.env</code> para gerenciar credenciais de forma segura e não expor em cógidos abertos ou arquivos comitados.</p>
+<p><strong>Conteúdo de <code>.env</code>:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="n">VINTI4_POS_ID</span><span class="o">=</span><span class="s">&quot;990000000&quot;</span>
+<span class="n">VINTI4_AUT_CODE</span><span class="o">=</span><span class="s">&quot;A1B2C3D4E5F67890&quot;</span>
+<span class="n">VINTI4_CALLBACK_URL</span><span class="o">=</span><span class="s">&quot;https://seusite.com/vinti4_callback.php&quot;</span>
+<span class="n">VINTI4_ENDPOINT</span><span class="o">=</span><span class="s">&quot;https://mc.vinti4net.cv/BizMPIOnUsSisp/&quot;</span>
+</code></pre></div>
+
+<h3 id="arquivo-1-checkouthtml-pagina-de-recolha-de-dados">Arquivo 1: <code>checkout.html</code> (Página de Recolha de Dados)<a class="headerlink" href="#arquivo-1-checkouthtml-pagina-de-recolha-de-dados" title="Permanent link">&para;</a></h3>
+<p>Esta página recolhe os dados de <em>billing</em> e o valor da compra, enviando-os por <code>POST</code> para o <em>script</em> de processamento interno (<code>postback.php</code>).</p>
+<blockquote>
+<p>Assegure-se de <strong>neutralizar</strong> as tentativas de <strong>adulteração</strong> de dados do formulário, como <strong>preço</strong>. <em>(aliás, evite enviar o preço do formulário ao <code>postback.php</code>)</em></p>
+</blockquote>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;pt&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Checkout de Compra Vinti4Pay<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>1. Iniciar Compra<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;process_postback.php&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Detalhes da Compra<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+        <span class="cm">&lt;!-- </span>
+<span class="cm">            O ideal seria pegar o preço diretamente na base de dados lá no postback.php</span>
+<span class="cm">            ou encriptar o preço aqui e desencriptar lá no postback.php</span>
+<span class="cm">            ! Nunca Envie o preço (unsafe) direto do formulário para o postback.php</span>
+<span class="cm">        --&gt;</span>
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;amount&quot;</span><span class="p">&gt;</span>Valor (CVE):<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;number&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;amount&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;amount&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;1250.00&quot;</span> <span class="na">readonly</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Dados de Faturação (Billing)<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;email&quot;</span><span class="p">&gt;</span>Email:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;email&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;email&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;email&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;cliente@exemplo.com&quot;</span> <span class="na">required</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;billAddrLine1&quot;</span><span class="p">&gt;</span>Morada (Linha 1):<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;billAddrLine1&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;billAddrLine1&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Rua Central, 10&quot;</span> <span class="na">required</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;billAddrCity&quot;</span><span class="p">&gt;</span>Cidade:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;billAddrCity&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;billAddrCity&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;Praia&quot;</span> <span class="na">required</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;billAddrPostCode&quot;</span><span class="p">&gt;</span>Cód. Postal:<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;billAddrPostCode&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;billAddrPostCode&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;7000&quot;</span> <span class="na">required</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;billAddrCountry&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;CV&quot;</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">hr</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span>Pagar Compra com Vinti4Net<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h3 id="arquivo-2-postbackphp-o-script-de-processamento-interno">Arquivo 2: <code>postback.php</code> (O Script de Processamento Interno)<a class="headerlink" href="#arquivo-2-postbackphp-o-script-de-processamento-interno" title="Permanent link">&para;</a></h3>
+<p>Este <em>script</em> prepara a transação de <strong>Compra</strong> (<code>preparePurchase</code>), utilizando a estrutura correta dos parâmetros de <em>billing</em> e carregando as configurações do <code>.env</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span>
+<span class="sd">/**</span>
+<span class="sd"> * 2. Processamento do Postback: Prepara a transação de COMPRA, </span>
+<span class="sd"> * gera o formulário HTML e redireciona.</span>
+<span class="sd"> */</span>
+
+<span class="k">require</span> <span class="s1">&#39;vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Erilshk\Vinti4Pay\Vinti4PayClient</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Erilshk\Vinti4Pay\Exceptions\Vinti4Exception</span><span class="p">;</span>
+
+<span class="c1">// --- CONFIGURAÇÃO ---</span>
+<span class="nv">$posID</span> <span class="o">=</span> <span class="nb">getenv</span><span class="p">(</span><span class="s1">&#39;VINTI4_POS_ID&#39;</span><span class="p">);</span>
+<span class="nv">$posAutCode</span> <span class="o">=</span> <span class="nb">getenv</span><span class="p">(</span><span class="s1">&#39;VINTI4_AUT_CODE&#39;</span><span class="p">);</span>
+<span class="nv">$callbackUrl</span> <span class="o">=</span> <span class="nb">getenv</span><span class="p">(</span><span class="s1">&#39;VINTI4_CALLBACK_URL&#39;</span><span class="p">);</span> 
+
+<span class="c1">// --- DADOS DO FORMULÁRIO ---</span>
+<span class="nv">$valorCompra</span> <span class="o">=</span> <span class="p">(</span><span class="nx">float</span><span class="p">)</span> <span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nv">$merchantRef</span> <span class="o">=</span> <span class="s1">&#39;PEDIDO_&#39;</span><span class="o">.</span><span class="nb">time</span><span class="p">();</span> 
+
+<span class="nv">$billing</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;email&#39;</span> <span class="o">=&gt;</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;billAddrCountry&#39;</span> <span class="o">=&gt;</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;billAddrCountry&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;132&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;billAddrCity&#39;</span> <span class="o">=&gt;</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;billAddrCity&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;billAddrLine1&#39;</span> <span class="o">=&gt;</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;billAddrLine1&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;billAddrPostCode&#39;</span> <span class="o">=&gt;</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;billAddrPostCode&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+
+<span class="cm">/* --- Usar Headers anti-cache seriam cruciais para evitar problemas no callback --- */</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vinti4PayClient</span><span class="p">(</span><span class="nv">$posID</span><span class="p">,</span> <span class="nv">$posAutCode</span><span class="p">);</span>
+
+    <span class="c1">// Preparar a Transação de Compra (Tipo 1)</span>
+    <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">preparePurchase</span><span class="p">(</span>
+        <span class="nx">amount</span><span class="o">:</span> <span class="nv">$valorCompra</span><span class="p">,</span>
+        <span class="nx">billing</span><span class="o">:</span> <span class="nv">$billing</span><span class="p">,</span>
+        <span class="nx">merchantRef</span><span class="o">:</span> <span class="nv">$merchantRef</span><span class="p">,</span>
+        <span class="nx">merchantSession</span><span class="o">:</span> <span class="nb">session_id</span><span class="p">()</span>
+    <span class="p">);</span>
+
+    <span class="c1">// Gerar o Formulário HTML de Redirecionamento</span>
+    <span class="nv">$htmlForm</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">createPaymentForm</span><span class="p">(</span><span class="nv">$callbackUrl</span><span class="p">);</span>
+
+    <span class="k">echo</span> <span class="nv">$htmlForm</span><span class="p">;</span> <span class="c1">// O redirecionamento é feito via JS contido no formulário</span>
+
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Vinti4Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">http_response_code</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+    <span class="k">echo</span> <span class="s2">&quot;Erro ao preparar a compra: &quot;</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">exit</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="arquivo-3-vinti4_callbackphp-o-script-de-callbackresposta">Arquivo 3: <code>vinti4_callback.php</code> (O Script de Callback/Resposta)<a class="headerlink" href="#arquivo-3-vinti4_callbackphp-o-script-de-callbackresposta" title="Permanent link">&para;</a></h3>
+<p>Este script processa a resposta da Vinti4Net, aplica os <em>headers</em> anti-cache para garantir o funcionamento do <em>postback</em> e utiliza o <code>ResponseResult</code> para a lógica de negócio.</p>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span>
+<span class="sd">/**</span>
+<span class="sd"> * 3. Script de Callback (Postback): Valida a segurança e processa o resultado da COMPRA.</span>
+<span class="sd"> */</span>
+
+<span class="k">require</span> <span class="s1">&#39;vendor/autoload.php&#39;</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Erilshk\Vinti4Pay\Vinti4PayClient</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Erilshk\Vinti4Pay\Models\ResponseResult</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Erilshk\Vinti4Pay\Exceptions\Vinti4Exception</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Dotenv\Dotenv</span><span class="p">;</span> <span class="c1">// Para carregar o .env</span>
+
+<span class="c1">// Carregar variáveis de ambiente</span>
+<span class="nx">Dotenv</span><span class="o">::</span><span class="na">createImmutable</span><span class="p">(</span><span class="no">__DIR__</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">safeLoad</span><span class="p">();</span>
+
+<span class="c1">// --- CONFIGURAÇÃO ---</span>
+<span class="nv">$posID</span> <span class="o">=</span> <span class="nb">getenv</span><span class="p">(</span><span class="s1">&#39;VINTI4_POS_ID&#39;</span><span class="p">);</span>
+<span class="nv">$posAutCode</span> <span class="o">=</span> <span class="nb">getenv</span><span class="p">(</span><span class="s1">&#39;VINTI4_AUT_CODE&#39;</span><span class="p">);</span>
+
+<span class="cm">/* --- Headers anti-cache são cruciais --- */</span>
+
+<span class="nv">$postData</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">;</span>
+
+<span class="k">echo</span> <span class="s2">&quot;&lt;html&gt;&lt;body&gt;&quot;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="s2">&quot;&lt;h1&gt;3. Processamento Final da Compra&lt;/h1&gt;&quot;</span><span class="p">;</span>
+
+<span class="k">try</span> <span class="p">{</span>
+    <span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vinti4PayClient</span><span class="p">(</span><span class="nv">$posID</span><span class="p">,</span> <span class="nv">$posAutCode</span><span class="p">);</span>
+
+    <span class="sd">/** @var ResponseResult $result */</span>
+    <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">processResponse</span><span class="p">(</span><span class="nv">$postData</span><span class="p">);</span>
+
+    <span class="c1">// --- LÓGICA DE NEGÓCIO ---</span>
+    <span class="nv">$result</span><span class="o">-&gt;</span><span class="na">onSuccess</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">ResponseResult</span> <span class="nv">$r</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 🎉 COMPRA Aprovada e Segura!</span>
+
+        <span class="nv">$ref</span> <span class="o">=</span> <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">()[</span><span class="s1">&#39;merchantRespMerchantRef&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="s1">&#39;N/A&#39;</span><span class="p">;</span>
+        <span class="c1">// ** AÇÃO: Atualizar o status do pedido no Banco de Dados **</span>
+
+        <span class="k">echo</span> <span class="s2">&quot;&lt;h2&gt;✅ Compra Confirmada!&lt;/h2&gt;&quot;</span><span class="p">;</span>
+        <span class="k">echo</span> <span class="s2">&quot;&lt;p&gt;Referência: **</span><span class="si">{</span><span class="nv">$ref</span><span class="si">}</span><span class="s2">**&lt;/p&gt;&quot;</span><span class="p">;</span>
+        <span class="k">echo</span> <span class="nv">$r</span><span class="o">-&gt;</span><span class="na">generateClientReceipt</span><span class="p">();</span>
+
+    <span class="p">})</span><span class="o">-&gt;</span><span class="na">onError</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">ResponseResult</span> <span class="nv">$r</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ❌ Falha na Compra</span>
+
+        <span class="c1">// ** AÇÃO: Marcar como FALHA **</span>
+
+        <span class="k">echo</span> <span class="s2">&quot;&lt;h2&gt;❌ Compra Não Aprovada.&lt;/h2&gt;&quot;</span><span class="p">;</span>
+        <span class="k">echo</span> <span class="s2">&quot;&lt;p&gt;Motivo: **</span><span class="si">{</span><span class="nv">$r</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span><span class="si">}</span><span class="s2">**&lt;/p&gt;&quot;</span><span class="p">;</span>
+
+    <span class="p">})</span><span class="o">-&gt;</span><span class="na">onCancel</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">ResponseResult</span> <span class="nv">$r</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ✋ Cancelamento pelo Usuário</span>
+
+        <span class="c1">// ** AÇÃO: Marcar como CANCELADO **</span>
+
+        <span class="k">echo</span> <span class="s2">&quot;&lt;h2&gt;❌ Compra Cancelada.&lt;/h2&gt;&quot;</span><span class="p">;</span>
+
+    <span class="p">});</span>
+
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">Vinti4Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ⚠️ ERRO DE SEGURANÇA ou ERRO CRÍTICO</span>
+    <span class="nb">http_response_code</span><span class="p">(</span><span class="mi">403</span><span class="p">);</span>
+    <span class="nb">error_log</span><span class="p">(</span><span class="s2">&quot;Alerta de Segurança/Erro Crítico: &quot;</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+    <span class="k">echo</span> <span class="s2">&quot;&lt;h2&gt;🚫 Erro Crítico.&lt;/h2&gt;&quot;</span><span class="p">;</span>
+    <span class="k">echo</span> <span class="s2">&quot;&lt;p&gt;A transação não pôde ser validada.&lt;/p&gt;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">echo</span> <span class="s2">&quot;&lt;/body&gt;&lt;/html&gt;&quot;</span><span class="p">;</span>
+</code></pre></div>
+
+<h2 id="headers-anti-cache-recomendados">🛑 Headers Anti-Cache Recomendados<a class="headerlink" href="#headers-anti-cache-recomendados" title="Permanent link">&para;</a></h2>
+<p>Para garantir que o seu <em>script</em> de <strong>Callback</strong> (<code>vinti4_callback.php</code>) processe a resposta da Vinti4Net de forma fiável e não seja armazenado em cache por <em>proxies</em> ou navegadores, deve incluir os seguintes <em>headers</em> no topo do seu arquivo de <em>callback</em>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">header(&quot;Cache-Control: no-store, no-cache, must-revalidate, max-age=0&quot;);</span>
+<span class="x">header(&quot;Cache-Control: post-check=0, pre-check=0&quot;, false);</span>
+<span class="x">header(&quot;Pragma: no-cache&quot;);</span>
+</code></pre></div>
+
+<h3 id="porque-usar-estes-headers">Porquê Usar Estes Headers?<a class="headerlink" href="#porque-usar-estes-headers" title="Permanent link">&para;</a></h3>
+<p>Estes <em>headers</em> <strong>forçam o navegador</strong> e qualquer servidor intermediário a buscar o conteúdo da página <strong>novamente</strong> em cada acesso, garantindo que o <code>$_POST</code> (que contém os dados críticos da transação) não seja perdido ou reutilizado de uma cópia em cache. Isso é vital para a <strong>segurança</strong> e o processamento correto do <code>processResponse()</code>.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../receipt/" class="btn btn-neutral float-left" title="Recibo"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../reference/" class="btn btn-neutral float-right" title="API Detalhada">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/erilshackle/vinti4pay-php" class="fa fa-code-fork" style="color: #fcfcfc"> erilshackle/vinti4pay-php</a>
+        </span>
+    
+    
+      <span><a href="../receipt/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../reference/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Eril TS Carvalho" /><link rel="canonical" href="https://github.com/erilshackle/vinti4pay-php/standalone/callbacks/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Callbacks e Respostas - Vinti4Pay PHP SDK</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Callbacks e Respostas";
+        var mkdocs_page_input_path = "standalone\\callbacks.md";
+        var mkdocs_page_url = "/erilshackle/vinti4pay-php/standalone/callbacks/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Vinti4Pay PHP SDK
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Introdução</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../installation/">Instalação</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../setup/">Configuração</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../usage/">Uso</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../callbacks/">Callbacks e Respostas</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../receipt/">Recibo</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../examples/">Exemplos</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Referência</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../reference/">API Detalhada</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../../api/">Documentor</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standalone Class</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../">Vint4PayClient</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Changelogs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../changelog/">Changelog</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Vinti4Pay PHP SDK</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Callbacks e Respostas</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/erilshackle/vinti4pay-php/edit/master/docs/standalone/callbacks.md">Edit on erilshackle/vinti4pay-php</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="callbacks-e-respostas">Callbacks e Respostas<a class="headerlink" href="#callbacks-e-respostas" title="Permanent link">&para;</a></h1>
+<p>Após o cliente ser redirecionado para o Vinti4Net e concluir (ou cancelar) a transação, o gateway enviará uma resposta (<strong>callback</strong>) para a URL que você definiu em <code>createPaymentForm()</code>.</p>
+<p>O seu script nessa URL é responsável por receber os dados, verificar a integridade da transação e processar o resultado.</p>
+<hr />
+<h2 id="1-processando-a-resposta">1. Processando a Resposta<a class="headerlink" href="#1-processando-a-resposta" title="Permanent link">&para;</a></h2>
+<p>O método <strong><code>processResponse(array $postData)</code></strong> é o ponto de entrada para lidar com o <em>callback</em>. Ele realiza as seguintes tarefas:</p>
+<ol>
+<li><strong>Determinação do Tipo:</strong> Identifica se é uma resposta de <strong>Pagamento</strong> (Compra, Serviço, Recarga) ou de <strong>Estorno</strong> (Refund).</li>
+<li><strong>Validação de Fingerprint:</strong> Verifica a chave de segurança (<code>fingerprint</code>) para garantir que os dados não foram adulterados.</li>
+<li><strong>Análise de Status:</strong> Analisa o código de resposta e o status da transação.</li>
+</ol>
+<h3 id="uso-do-processresponse">Uso do <code>processResponse</code><a class="headerlink" href="#uso-do-processresponse" title="Permanent link">&para;</a></h3>
+<p>O método recebe o array de dados <strong>POST</strong> integral enviado pelo Vinti4Net (geralmente <code>$_POST</code>).</p>
+<div class="codehilite"><pre><span></span><code><span class="x">use Erilshk\Vinti4Pay\Vinti4PayClient;</span>
+
+<span class="x">// 1. Instancie o cliente (com as mesmas credenciais usadas para a requisição)</span>
+<span class="x">$client = new Vinti4PayClient($posID, $posAutCode);</span>
+
+<span class="x">// 2. Processa os dados POST recebidos do Vinti4Net</span>
+<span class="x">$response = $client-&gt;processResponse($_POST); </span>
+</code></pre></div>
+
+<h2 id="2-interpretacao-do-array-de-resposta">2. Interpretação do Array de Resposta<a class="headerlink" href="#2-interpretacao-do-array-de-resposta" title="Permanent link">&para;</a></h2>
+<p>O método <code>processResponse</code> retorna um <strong>array associativo simples</strong>, contendo o status de processamento e os dados brutos da transação.</p>
+<h3 id="estrutura-do-array-retornado">Estrutura do Array Retornado<a class="headerlink" href="#estrutura-do-array-retornado" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Chave</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>success</code></strong></td>
+<td style="text-align: left;"><code>bool</code></td>
+<td style="text-align: left;"><code>true</code> se a transação foi <strong>concluída e aprovada</strong>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>message</code></strong></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Mensagem descritiva do status (Ex: "Aprovada", "Cancelada pelo usuário").</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>status</code></strong></td>
+<td style="text-align: left;"><code>int</code></td>
+<td style="text-align: left;">Código de status interno do SDK (Ex: 0 para sucesso, 1 para falha, 2 para cancelamento).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>data</code></strong></td>
+<td style="text-align: left;"><code>array</code></td>
+<td style="text-align: left;">O array <strong>completo</strong> de dados POST recebidos do Vinti4Net.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>dcc</code></strong></td>
+<td style="text-align: left;"><code>array</code></td>
+<td style="text-align: left;">Dados de <em>Dynamic Currency Conversion</em> (DCC), se disponíveis.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="exemplo-de-logica-no-script-de-callback">Exemplo de Lógica no Script de Callback<a class="headerlink" href="#exemplo-de-logica-no-script-de-callback" title="Permanent link">&para;</a></h3>
+<p>Seu script de callback deve usar o elemento <code>success</code> para determinar a ação a ser tomada (atualizar o status do pedido, enviar confirmação, etc.).</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// ... (código de instanciação e chamada ao processResponse)</span>
+
+<span class="x">if ($responseArray[&#39;success&#39;] === true) {</span>
+<span class="x">    // 🎉 Sucesso</span>
+
+<span class="x">    // Obtenha os dados essenciais da transação</span>
+<span class="x">    $transactionID = $responseArray[&#39;data&#39;][&#39;transactionID&#39;] ?? &#39;N/A&#39;;</span>
+<span class="x">    $amount = $responseArray[&#39;data&#39;][&#39;amount&#39;] ?? &#39;N/A&#39;;</span>
+<span class="x">    $ref = $responseArray[&#39;data&#39;][&#39;merchantRef&#39;] ?? &#39;N/A&#39;;</span>
+
+<span class="x">    // Ação: </span>
+<span class="x">    // - Registre o sucesso da transação no banco de dados.</span>
+<span class="x">    // - Envie o email de confirmação ao cliente.</span>
+
+<span class="x">    echo &quot;&lt;h1&gt;Pagamento Aprovado!&lt;/h1&gt;&quot;;</span>
+<span class="x">    echo &quot;&lt;p&gt;ID da Transação: {$transactionID}&lt;/p&gt;&quot;;</span>
+
+<span class="x">} elseif ($responseArray[&#39;status&#39;] === 2) {</span>
+<span class="x">    // ✋ Cancelamento</span>
+<span class="x">    // Ação:</span>
+<span class="x">    // - Marque o pedido como cancelado pelo usuário.</span>
+
+<span class="x">    echo &quot;&lt;h1&gt;Transação Cancelada&lt;/h1&gt;&quot;;</span>
+<span class="x">    echo &quot;&lt;p&gt;O cliente cancelou a operação no gateway.&lt;/p&gt;&quot;;</span>
+
+<span class="x">} else {</span>
+<span class="x">    // ❌ Falha ou Erro de Processamento</span>
+<span class="x">    // Ação:</span>
+<span class="x">    // - Registre a falha e o motivo (message).</span>
+
+<span class="x">    echo &quot;&lt;h1&gt;Falha no Pagamento&lt;/h1&gt;&quot;;</span>
+<span class="x">    echo &quot;&lt;p&gt;Motivo: {$responseArray[&#39;message&#39;]}&lt;/p&gt;&quot;;</span>
+
+<span class="x">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="3-codigos-de-resposta-comuns">3. Códigos de Resposta Comuns<a class="headerlink" href="#3-codigos-de-resposta-comuns" title="Permanent link">&para;</a></h2>
+<p>Embora o campo <code>message</code> forneça um texto amigável, é útil conhecer os códigos de status mais comuns:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><code>status</code> (interno SDK)</th>
+<th style="text-align: left;">Significado</th>
+<th style="text-align: left;">Ação Típica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>0</strong></td>
+<td style="text-align: left;"><strong>SUCESSO</strong></td>
+<td style="text-align: left;">A transação foi aprovada e concluída.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>1</strong></td>
+<td style="text-align: left;"><strong>FALHA</strong></td>
+<td style="text-align: left;">A transação foi negada pelo emissor ou houve erro de processamento.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2</strong></td>
+<td style="text-align: left;"><strong>CANCELAMENTO</strong></td>
+<td style="text-align: left;">O usuário cancelou a transação manualmente.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>-1</strong></td>
+<td style="text-align: left;"><strong>FINGERPRINT INVÁLIDA</strong></td>
+<td style="text-align: left;">Falha na verificação de segurança (possível alteração dos dados). <strong>Requer investigação!</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p><strong>Próximo Passo:</strong> Explore as outras funcionalidades do SDK, como a visualização do recibo, na seção <strong><a href="receipt.md">Recibos</a></strong>.</p>
+</blockquote>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/erilshackle/vinti4pay-php" class="fa fa-code-fork" style="color: #fcfcfc"> erilshackle/vinti4pay-php</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Eril TS Carvalho" /><link rel="canonical" href="https://github.com/erilshackle/vinti4pay-php/setup/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Configuração - Vinti4Pay PHP SDK</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Configura\u00e7\u00e3o";
+        var mkdocs_page_input_path = "setup.md";
+        var mkdocs_page_url = "/erilshackle/vinti4pay-php/setup/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Vinti4Pay PHP SDK
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introdução</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../installation/">Instalação</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Configuração</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-instanciacao-do-cliente">1. Instanciação do Cliente</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#credenciais-necessarias">Credenciais Necessárias</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exemplo-de-configuracao">Exemplo de Configuração</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configuracao-para-testes-endpoint">🧪 Configuração para Testes (Endpoint)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-parametros-globais-da-requisicao">2. Parâmetros Globais da Requisição</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#metodo-setrequestparamsarray-params">Método setRequestParams(array $params)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-lancamento-de-excecoes">3. Lançamento de Exceções</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../usage/">Uso</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../callbacks/">Callbacks e Respostas</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../receipt/">Recibo</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../examples/">Exemplos</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Referência</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../reference/">API Detalhada</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../api/">Documentor</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standalone Class</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../standalone/">Vint4PayClient</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Changelogs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../changelog/">Changelog</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Vinti4Pay PHP SDK</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Configuração</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/erilshackle/vinti4pay-php/edit/master/docs/setup.md">Edit on erilshackle/vinti4pay-php</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="configuracao-do-cliente">⚙️ Configuração do Cliente<a class="headerlink" href="#configuracao-do-cliente" title="Permanent link">&para;</a></h1>
+<p>Após <a href="../installation/">instalar o SDK</a>, o próximo passo é configurar o cliente principal, <strong><code>Vinti4PayClient</code></strong>, com as credenciais do seu Ponto de Venda (POS).</p>
+<h2 id="1-instanciacao-do-cliente">1. Instanciação do Cliente<a class="headerlink" href="#1-instanciacao-do-cliente" title="Permanent link">&para;</a></h2>
+<p>O <code>Vinti4PayClient</code> é a classe central que você usará para preparar todas as transações (compras, serviços, recargas e estornos).</p>
+<h3 id="credenciais-necessarias">Credenciais Necessárias<a class="headerlink" href="#credenciais-necessarias" title="Permanent link">&para;</a></h3>
+<p>Você precisará das seguintes credenciais fornecidas pela Vinti4Net (SISP) para o seu POS:</p>
+<ol>
+<li><strong><code>$posID</code></strong>: O ID do seu Ponto de Venda.</li>
+<li><strong><code>$posAutCode</code></strong>: O Código de Autorização do POS (chave de segurança usada para gerar a <em>fingerprint</em>).</li>
+</ol>
+<h3 id="exemplo-de-configuracao">Exemplo de Configuração<a class="headerlink" href="#exemplo-de-configuracao" title="Permanent link">&para;</a></h3>
+<p>Utilize o <code>namespace</code> correto e passe as credenciais para o construtor:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">use Erilshk\Vinti4Pay\Vinti4PayClient;</span>
+
+<span class="x">// Suas credenciais (Substitua pelos valores reais)</span>
+<span class="x">$posID = &#39;990000000&#39;; </span>
+<span class="x">$posAutCode = &#39;A1B2C3D4E5F67890&#39;; </span>
+
+<span class="x">/**</span>
+<span class="x"> * Cria a instância do cliente.</span>
+<span class="x"> * * @param string $posID O ID do Ponto de Venda.</span>
+<span class="x"> * @param string $posAutCode O Código de Autorização.</span>
+<span class="x"> * @param string|null $endpoint (Opcional) URL para ambiente de teste/staging.</span>
+<span class="x"> */</span>
+<span class="x">$client = new Vinti4PayClient($posID, $posAutCode);</span>
+</code></pre></div>
+
+<h3 id="configuracao-para-testes-endpoint">🧪 Configuração para Testes (<em>Endpoint</em>)<a class="headerlink" href="#configuracao-para-testes-endpoint" title="Permanent link">&para;</a></h3>
+<p>Se estiver trabalhando em um ambiente de homologação ou teste que utilize um <em>endpoint</em> diferente do padrão de produção, você pode passá-lo como o terceiro argumento opcional no construtor:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Use o endpoint fornecido pela Vinti4Net para o ambiente de testes</span>
+<span class="x">$endpointTeste = &#39;[https://sistemadetestes.vinti4net.cv/api](https://sistemadetestes.vinti4net.cv/api)&#39;;</span>
+<span class="x">$clientTeste = new Vinti4PayClient($posID, $posAutCode, $endpointTeste);</span>
+</code></pre></div>
+
+<h2 id="2-parametros-globais-da-requisicao">2. Parâmetros Globais da Requisição<a class="headerlink" href="#2-parametros-globais-da-requisicao" title="Permanent link">&para;</a></h2>
+<p>O método <code>setRequestParams()</code> permite definir parâmetros opcionais que serão aplicados a <strong>todas</strong> as transações preparadas por esta instância do cliente.</p>
+<h3 id="metodo-setrequestparamsarray-params">Método <code>setRequestParams(array $params)</code><a class="headerlink" href="#metodo-setrequestparamsarray-params" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parâmetro</th>
+<th style="text-align: left;">Descrição</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>currency</code></strong></td>
+<td style="text-align: left;">Moeda da transação (ISO 4217 code). Aceita código ISO de 3 letras ou numérico.</td>
+<td style="text-align: left;"><code>string</code> / <code>int</code></td>
+<td style="text-align: left;"><code>'CVE'</code>, <code>'USD'</code>, <code>978</code> (EUR)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>languageMessages</code></strong></td>
+<td style="text-align: left;">Idioma da página de pagamento exibida ao cliente.</td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><code>'pt'</code> (Português), <code>'en'</code> (Inglês)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>entityCode</code></td>
+<td style="text-align: left;">Código da entidade (pode ser definido globalmente se o POS for específico para uma entidade).</td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><code>'20002'</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>referenceNumber</code></td>
+<td style="text-align: left;">Número de referência (geralmente definido por transação, mas pode ser global).</td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><code>'00123456789'</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>user</code></td>
+<td style="text-align: left;">Informações opcionais sobre o utilizador.</td>
+<td style="text-align: left;"><code>array</code></td>
+<td style="text-align: left;"><code>['id' =&gt; 'user123']</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemplo de uso:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">$client-&gt;setRequestParams([</span>
+<span class="x">    &#39;currency&#39; =&gt; &#39;CVE&#39;, // Transações em Escudo Cabo-verdiano</span>
+<span class="x">    &#39;languageMessages&#39; =&gt; &#39;pt&#39;, // Interface do Vinti4Net em Português</span>
+<span class="x">    &#39;merchantRef&#39; =&gt; &#39;REF-&#39; . time(), // Pode pré-definir uma base de referência</span>
+<span class="x">]);</span>
+</code></pre></div>
+
+<blockquote>
+<p>:warning: <strong>Atenção:</strong> Se um parâmetro for definido em <code>setRequestParams()</code> e também no método <code>prepare*</code> específico (ex: <code>preparePurchase</code>), o valor definido no método <code>prepare*</code> <strong>prevalecerá</strong> para aquela transação.</p>
+</blockquote>
+<hr />
+<h2 id="3-lancamento-de-excecoes">3. Lançamento de Exceções<a class="headerlink" href="#3-lancamento-de-excecoes" title="Permanent link">&para;</a></h2>
+<p>O <code>Vinti4PayClient</code> utiliza a exceção customizada <strong><code>Vinti4Exception</code></strong> para indicar erros de validação ou de lógica de negócios, como tentar preparar uma nova transação antes de finalizar a anterior:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">use Erilshk\Vinti4Pay\Exceptions\Vinti4Exception;</span>
+
+<span class="x">try {</span>
+<span class="x">    // ... código de configuração e preparação</span>
+<span class="x">} catch (Vinti4Exception $e) {</span>
+<span class="x">    // Lidar com erro interno do SDK ou validação inválida</span>
+<span class="x">    echo &quot;Erro de Configuração/Transação: &quot; . $e-&gt;getMessage();</span>
+<span class="x">}</span>
+</code></pre></div>
+
+<hr />
+<blockquote>
+<p><strong>Próximo Passo:</strong> Com o cliente configurado, avance para a seção <strong><a href="../usage/">Uso</a></strong> para aprender a preparar as diferentes modalidades de transação (compra, serviço, etc.).</p>
+</blockquote>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../installation/" class="btn btn-neutral float-left" title="Instalação"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../usage/" class="btn btn-neutral float-right" title="Uso">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/erilshackle/vinti4pay-php" class="fa fa-code-fork" style="color: #fcfcfc"> erilshackle/vinti4pay-php</a>
+        </span>
+    
+    
+      <span><a href="../installation/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../usage/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

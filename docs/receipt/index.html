@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Eril TS Carvalho" /><link rel="canonical" href="https://github.com/erilshackle/vinti4pay-php/receipt/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Recibo - Vinti4Pay PHP SDK</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Recibo";
+        var mkdocs_page_input_path = "receipt.md";
+        var mkdocs_page_url = "/erilshackle/vinti4pay-php/receipt/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Vinti4Pay PHP SDK
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introdução</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../installation/">Instalação</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../setup/">Configuração</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../usage/">Uso</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../callbacks/">Callbacks e Respostas</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Recibo</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-geracao-simplificada-via-responseresult">1. Geração Simplificada (Via ResponseResult)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#metodos-disponiveis-no-responseresult">Métodos Disponíveis no ResponseResult</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exemplo-de-uso-rapido">Exemplo de Uso Rápido</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-geracao-customizada-via-classe-receipt">2. Geração Customizada (Via Classe Receipt)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#metodo-client-receipt">Método $client-&gt;receipt()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#utilizacao-de-templates-e-customizacao">Utilização de Templates e Customização</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../examples/">Exemplos</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Referência</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../reference/">API Detalhada</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../api/">Documentor</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standalone Class</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../standalone/">Vint4PayClient</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Changelogs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../changelog/">Changelog</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Vinti4Pay PHP SDK</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Recibo</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/erilshackle/vinti4pay-php/edit/master/docs/receipt.md">Edit on erilshackle/vinti4pay-php</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="recibo-e-comprovativos">🧾 Recibo e Comprovativos<a class="headerlink" href="#recibo-e-comprovativos" title="Permanent link">&para;</a></h1>
+<p>O SDK oferece duas abordagens para a geração de comprovativos (recibos), dependendo da necessidade de customização:</p>
+<ol>
+<li><strong>Geração Simplificada:</strong> Direto no objeto <code>ResponseResult</code>.</li>
+<li><strong>Geração Customizada:</strong> Utilizando a classe dedicada <strong><code>Erilshk\Vinti4Pay\Models\Receipt</code></strong>.</li>
+</ol>
+<hr />
+<h2 id="1-geracao-simplificada-via-responseresult">1. Geração Simplificada (Via ResponseResult)<a class="headerlink" href="#1-geracao-simplificada-via-responseresult" title="Permanent link">&para;</a></h2>
+<p>O objeto <strong><code>ResponseResult</code></strong> (retornado por <code>processResponse()</code>) já inclui métodos rápidos que geram HTML formatado a partir dos dados da transação, sem a necessidade de instanciar a classe <code>Receipt</code>.</p>
+<h3 id="metodos-disponiveis-no-responseresult">Métodos Disponíveis no <code>ResponseResult</code><a class="headerlink" href="#metodos-disponiveis-no-responseresult" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Método</th>
+<th style="text-align: left;">Propósito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>generateReceipt()</code></strong></td>
+<td style="text-align: left;">Gera um recibo em HTML <strong>técnico</strong> e detalhado, ideal para auditoria.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>generateClientReceipt()</code></strong></td>
+<td style="text-align: left;">Gera um recibo em HTML <strong>resumido</strong> e amigável para o cliente final.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>getMerchantReceipt()</code></strong></td>
+<td style="text-align: left;">Retorna o HTML do recibo <strong>original</strong> (campo <code>merchantRespClientReceipt</code>) enviado pela Vinti4Net.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="exemplo-de-uso-rapido">Exemplo de Uso Rápido<a class="headerlink" href="#exemplo-de-uso-rapido" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">use Erilshk\Vinti4Pay\Models\ResponseResult;</span>
+
+<span class="x">/** @var ResponseResult $result */</span>
+<span class="x">// ... (após processamento bem-sucedido)</span>
+
+<span class="x">if ($result-&gt;isSuccessful()) {</span>
+<span class="x">    // Exibe o comprovativo simples para o cliente</span>
+<span class="x">    echo $result-&gt;generateClientReceipt();</span>
+
+<span class="x">    // Opcional: Registra o recibo técnico no log</span>
+<span class="x">    error_log(&quot;Recibo Técnico: &quot; . $result-&gt;generateReceipt());</span>
+<span class="x">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="2-geracao-customizada-via-classe-receipt">2. Geração Customizada (Via Classe <code>Receipt</code>)<a class="headerlink" href="#2-geracao-customizada-via-classe-receipt" title="Permanent link">&para;</a></h2>
+<p>Para cenários que exigem <strong>templates customizados</strong> ou injeção de parâmetros adicionais, você deve usar a classe <strong><code>Receipt</code></strong>.</p>
+<p>O <code>Vinti4PayClient</code> fornece um <em>helper</em> simples para instanciar esta classe:</p>
+<h3 id="metodo-client-receipt">Método <code>$client-&gt;receipt()</code><a class="headerlink" href="#metodo-client-receipt" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">use Erilshk\Vinti4Pay\Vinti4PayClient;</span>
+<span class="x">use Erilshk\Vinti4Pay\Models\Receipt;</span>
+
+<span class="x">// 1. Instancie o cliente</span>
+<span class="x">$client = new Vinti4PayClient($posID, $posAutCode);</span>
+
+<span class="x">// 2. Obtenha os dados da transação (ex: do ResponseResult ou do seu banco de dados)</span>
+<span class="x">$transactionData = $result-&gt;getData(); </span>
+
+<span class="x">// 3. Utilize o helper do cliente para instanciar a classe Receipt</span>
+<span class="x">/** @var Receipt $receipt */</span>
+<span class="x">$receipt = $client-&gt;receipt($transactionData); </span>
+</code></pre></div>
+
+<h3 id="utilizacao-de-templates-e-customizacao">Utilização de Templates e Customização<a class="headerlink" href="#utilizacao-de-templates-e-customizacao" title="Permanent link">&para;</a></h3>
+<p>Após instanciar o objeto <code>$receipt</code>, utilize o método <code>generateReceipt()</code> para aplicar templates customizados e injetar dados extras.</p>
+<p><strong>Templates Padrão:</strong> O SDK procura os arquivos HTML (ex: <code>transaction_receipt.html</code>) no diretório padrão.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Método</th>
+<th style="text-align: left;">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>generateReceipt(?string $template, array $params)</code></strong></td>
+<td style="text-align: left;">Gera o HTML usando um template específico ou o template padrão determinado pelo tipo de transação (Compra, Estorno, Serviço).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>saveReceipt(string $path, ...)</code></strong></td>
+<td style="text-align: left;">Gera o recibo e salva o HTML diretamente em um arquivo no caminho especificado.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exemplo de Customização:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Injetar o nome da entidade e uma mensagem de rodapé</span>
+<span class="x">$params = [</span>
+<span class="x">    &#39;ENTITY&#39; =&gt; &#39;Empresa XPTO&#39;, </span>
+<span class="x">    &#39;FOOTER&#39; =&gt; &#39;Obrigado por utilizar os nossos serviços!&#39;,</span>
+<span class="x">];</span>
+
+<span class="x">// O template &quot;service_custom&quot; deve existir no diretório de templates ou ser passado como caminho absoluto</span>
+<span class="x">$htmlReciboCustomizado = $receipt-&gt;generateReceipt(&#39;service_custom&#39;, $params);</span>
+
+<span class="x">echo $htmlReciboCustomizado;</span>
+</code></pre></div>
+
+<hr />
+<blockquote>
+<p><strong>Próximo Passo:</strong> Explore o histórico de alterações da sua biblioteca na seção <strong><a href="../changelog/">Changelog</a></strong>.</p>
+</blockquote>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../callbacks/" class="btn btn-neutral float-left" title="Callbacks e Respostas"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../examples/" class="btn btn-neutral float-right" title="Exemplos">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/erilshackle/vinti4pay-php" class="fa fa-code-fork" style="color: #fcfcfc"> erilshackle/vinti4pay-php</a>
+        </span>
+    
+    
+      <span><a href="../callbacks/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../examples/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

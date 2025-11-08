@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - feat: Add example client for Vinti4Pay integration
 - feat: Add model Receipt
 - Add CI workflow with Codecov
+- Add Documentation Release
 
 ### Fixed
 - fix: update DCC handling in Vinti4Pay class to improve data parsing

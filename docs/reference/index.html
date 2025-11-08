@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Eril TS Carvalho" /><link rel="canonical" href="https://github.com/erilshackle/vinti4pay-php/reference/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>API Detalhada - Vinti4Pay PHP SDK</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "API Detalhada";
+        var mkdocs_page_input_path = "reference.md";
+        var mkdocs_page_url = "/erilshackle/vinti4pay-php/reference/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Vinti4Pay PHP SDK
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introdução</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../installation/">Instalação</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../setup/">Configuração</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../usage/">Uso</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../callbacks/">Callbacks e Respostas</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../receipt/">Recibo</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../examples/">Exemplos</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Referência</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">API Detalhada</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-vinti4payclient">1. Vinti4PayClient</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#construtor">Construtor</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configuracao">Configuração</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#parametros-opcionais">Parâmetros Opcionais</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#aditionals-setbillingparam">$aditionals (setBillingParam)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#params-setrequestparams">$params (setRequestParams)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#preparacao-de-transacoes">Preparação de transações</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#execucao-e-resposta">Execução e resposta</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-responseresult">2. ResponseResult</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#propriedades">Propriedades</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#constantes">Constantes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#metodos">Métodos</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-receipt">3. Receipt</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#construtor_1">Construtor</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#metodos_1">Métodos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#observacoes-gerais">Observações gerais</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../api/">Documentor</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standalone Class</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../standalone/">Vint4PayClient</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Changelogs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../changelog/">Changelog</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Vinti4Pay PHP SDK</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Referência</li>
+      <li class="breadcrumb-item active">API Detalhada</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/erilshackle/vinti4pay-php/edit/master/docs/reference.md">Edit on erilshackle/vinti4pay-php</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="api-vinti4pay-referencia-completa">🛠️ API Vinti4Pay – Referência Completa<a class="headerlink" href="#api-vinti4pay-referencia-completa" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="1-vinti4payclient">1. <code>Vinti4PayClient</code><a class="headerlink" href="#1-vinti4payclient" title="Permanent link">&para;</a></h2>
+<p><strong>Namespace:</strong> <code>Erilshk\Vinti4Pay</code>  # Classe principal para todas as operações com a Vinti4Net</p>
+<h3 id="construtor">Construtor<a class="headerlink" href="#construtor" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x"># Inicializa o cliente Vinti4Pay</span>
+<span class="x">__construct(</span>
+<span class="x">    string $posID,                  # ID do ponto de venda (POS)</span>
+<span class="x">    string $posAutCode,             # Código de autorização do POS</span>
+<span class="x">    ?string $endpoint = null        # URL do endpoint da API (opcional, usado para ambiente de testes)</span>
+<span class="x">) </span>
+</code></pre></div>
+
+<h3 id="configuracao">Configuração<a class="headerlink" href="#configuracao" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x"># Define dados de faturamento do cliente</span>
+<span class="x">setBillingParams(</span>
+<span class="x">    string $email,                  # Email do cliente</span>
+<span class="x">    string $country,                # Código do país (ISO ou numérico)</span>
+<span class="x">    string $city,                   # Cidade de faturamento</span>
+<span class="x">    string $address,                # Endereço de faturamento</span>
+<span class="x">    string $postCode,               # Código postal</span>
+<span class="x">    array $aditional = []           # Campos opcionais (telefones, endereço de envio, acctID, etc.)</span>
+<span class="x">): static                           # Retorna a instância do cliente para encadeamento de métodos</span>
+
+
+<span class="x"># Define parâmetros opcionais da transação</span>
+<span class="x">setRequestParams(</span>
+<span class="x">    array $params                   # Array de parâmetros opcionais: currency, languageMessages, entityCode, referenceNumber, merchantRef, merchantSession, addrMatch, purchaseRequest, user</span>
+<span class="x">): static                           # Retorna a instância do cliente para encadeamento</span>
+</code></pre></div>
+
+<p>Perfeito! Aqui está uma versão resumida e visual em tabela, mas pensada para referência rápida — sem detalhes longos, apenas nomes e breve descrição:</p>
+<hr />
+<h2 id="parametros-opcionais">Parâmetros Opcionais<a class="headerlink" href="#parametros-opcionais" title="Permanent link">&para;</a></h2>
+<h3 id="aditionals-setbillingparam"><code>$aditionals</code> (<code>setBillingParam</code>)<a class="headerlink" href="#aditionals-setbillingparam" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>billAddrLine2</code></td>
+<td>Endereço linha 2 do billing</td>
+</tr>
+<tr>
+<td><code>billAddrLine3</code></td>
+<td>Endereço linha 3 do billing</td>
+</tr>
+<tr>
+<td><code>billAddrState</code></td>
+<td>Estado/Província do billing</td>
+</tr>
+<tr>
+<td><code>shipAddrCountry</code></td>
+<td>País do envio</td>
+</tr>
+<tr>
+<td><code>shipAddrCity</code></td>
+<td>Cidade do envio</td>
+</tr>
+<tr>
+<td><code>shipAddrLine1</code></td>
+<td>Endereço linha 1 do envio</td>
+</tr>
+<tr>
+<td><code>shipAddrPostCode</code></td>
+<td>Código postal do envio</td>
+</tr>
+<tr>
+<td><code>shipAddrState</code></td>
+<td>Estado/Província do envio</td>
+</tr>
+<tr>
+<td><code>addrMatch</code></td>
+<td><code>'Y'</code> ou <code>'N'</code> — copiar billing → shipping</td>
+</tr>
+<tr>
+<td><code>workPhone</code></td>
+<td>Telefone de trabalho (<code>['cc' =&gt; '238', 'subscriber' =&gt; '9999999']</code>)</td>
+</tr>
+<tr>
+<td><code>mobilePhone</code></td>
+<td>Telefone móvel (<code>['cc' =&gt; '238', 'subscriber' =&gt; '9999999']</code>)</td>
+</tr>
+<tr>
+<td><code>acctID</code></td>
+<td>ID da conta do cliente</td>
+</tr>
+<tr>
+<td><code>acctInfo</code></td>
+<td><strong>Array com informações detalhadas da conta-utilizador: </strong>&#128712;<br> &nbsp;&nbsp;• <code>chAccAgeInd</code> – Idade da conta: (<abbr title='Sem conta'><code>01</code></abbr>, <abbr title='criado durante a transação'><code>02</code></abbr>, <abbr title=' menos de 30 dias'><code>03</code></abbr>, <abbr title='entre 30 e 60 dias'><code>04</code></abbr>, <abbr title='mais de 60 dias'><code>06</code></abbr>) <br> &nbsp;&nbsp;• <code>chAccDate</code> – Data de criação da conta (<abbr title='ex: 20220215'><code>yyyyMMdd</code></abbr>)<br> &nbsp;&nbsp;• <code>chAccChange</code> – Data da última alteração da conta (<abbr title='ex: 20220222'><code>yyyyMMdd</code></abbr>)<br> &nbsp;&nbsp;• <code>chAccPwChange</code> – Data da última alteração da senha (<abbr title='ex: 20251108'><code>yyyyMMdd</code></abbr>)<br> &nbsp;&nbsp;• <code>chAccPwChangeInd</code> – Indicador de mudança de senha (<abbr title='01 = sem conta; 02 = criado durante a transação; 03 = menos 30 dias; 04 = entre 30 e 60 dias; 05 = mais 60 dias '><code>01-05</code></abbr> = <em>chAccAgeInd</em>)<br> &nbsp;&nbsp;• <code>suspiciousAccActivity</code> – Indica se há atividade  <abbr title="ex: marque quando houver uma transaçao com fingrprint inválido">suspeita</abbr> (<code>01</code> Não, <code>02</code> Suspeito)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="params-setrequestparams"><code>$params</code> (<code>setRequestParams</code>)<a class="headerlink" href="#params-setrequestparams" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parâmetro</th>
+<th>Descrição rápida</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>currency</code></td>
+<td>Moeda (ISO4217 ou código interno)</td>
+</tr>
+<tr>
+<td><code>languageMessages</code></td>
+<td><code>'pt'</code> ou <code>'en'</code></td>
+</tr>
+<tr>
+<td><code>entityCode</code></td>
+<td>Código da entidade (pagamento de fatura)</td>
+</tr>
+<tr>
+<td><code>referenceNumber</code></td>
+<td>Número de referência (fatura ou serviço)</td>
+</tr>
+<tr>
+<td><code>merchantRef</code></td>
+<td>Referência interna do comerciante</td>
+</tr>
+<tr>
+<td><code>merchantSession</code></td>
+<td>Identificador da sessão do comerciante</td>
+</tr>
+<tr>
+<td><code>addrMatch</code></td>
+<td>Flag de correspondência de endereço</td>
+</tr>
+<tr>
+<td><code>purchaseRequest</code></td>
+<td>Array opcional com dados de 3DS</td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>Array ou string com informações do usuário</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="preparacao-de-transacoes">Preparação de transações<a class="headerlink" href="#preparacao-de-transacoes" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x"># Compra de produtos/serviços</span>
+<span class="x">preparePurchase(</span>
+<span class="x">    float|string $amount,           # Valor da compra (float ou string)</span>
+<span class="x">    array $billing,                 # Dados de faturamento do cliente (billing)</span>
+<span class="x">    ?string $merchantRef = null,    # Referência interna do comerciante (opcional)</span>
+<span class="x">    ?string $merchantSession = null # Sessão interna do comerciante (opcional)</span>
+<span class="x">): static                           # Retorna a própria instância para chaining</span>
+
+<span class="x"># Pagamento de faturas</span>
+<span class="x">prepareServicePayment(</span>
+<span class="x">    float|string $amount,           # Valor do pagamento</span>
+<span class="x">    string $entity,                 # Código da entidade (ex: luz, água)</span>
+<span class="x">    string $reference,              # Número de referência da fatura</span>
+<span class="x">    ?string $merchantRef = null,    # Referência interna do comerciante (opcional)</span>
+<span class="x">    ?string $merchantSession = null # Sessão interna do comerciante (opcional)</span>
+<span class="x">): static                           # Retorna a própria instância para chaining</span>
+
+<span class="x"># Recarga de celular</span>
+<span class="x">prepareRecharge(</span>
+<span class="x">    float|string $amount,           # Valor da recarga</span>
+<span class="x">    string $entity,                 # Código do operador ou serviço de recarga</span>
+<span class="x">    string $number,                 # Número do telefone ou cartão a recarregar</span>
+<span class="x">    ?string $merchantRef = null,    # Referência interna do comerciante (opcional)</span>
+<span class="x">    ?string $merchantSession = null # Sessão interna do comerciante (opcional)</span>
+<span class="x">): static                           # Retorna a própria instância para chaining</span>
+
+<span class="x"># Estorno/reembolso</span>
+<span class="x">prepareRefund(</span>
+<span class="x">    float|string $amount,           # Valor a ser estornado</span>
+<span class="x">    string $merchantRef,            # Referência do comerciante da transação original</span>
+<span class="x">    string $merchantSession,        # Sessão do comerciante da transação original</span>
+<span class="x">    string $transactionID,          # ID da transação original</span>
+<span class="x">    string $clearingPeriod          # Período de compensação da transação</span>
+<span class="x">): static                           # Retorna a própria instância para chaining</span>
+</code></pre></div>
+
+<h3 id="execucao-e-resposta">Execução e resposta<a class="headerlink" href="#execucao-e-resposta" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x"># Gera formulário HTML pronto para submissão ao gateway</span>
+<span class="x">createPaymentForm(</span>
+<span class="x">    string $responseUrl             # URL de callback do comerciante (onde o gateway envia a resposta)</span>
+<span class="x">): string                           # Retorna o HTML do formulário, pronto para envio automático</span>
+
+
+<span class="x"># Processa callback do gateway e retorna objeto ResponseResult</span>
+<span class="x">processResponse(</span>
+<span class="x">    array $postData                 # Dados recebidos do gateway via POST (normalmente $_POST)</span>
+<span class="x">): ResponseResult                   # Retorna instância de ResponseResult com status, dados e DCC se houver</span>
+
+
+<span class="x"># Cria objeto Receipt para gerar recibos HTML customizados</span>
+<span class="x">receipt(</span>
+<span class="x">    ResponseResult|array $res       # Pode ser o objeto ResponseResult ou um array de callback</span>
+<span class="x">): Receipt                          # Retorna instância de Receipt para gerar HTML do recibo ou salvar em arquivo</span>
+</code></pre></div>
+
+<hr />
+<h2 id="2-responseresult">2. <code>ResponseResult</code><a class="headerlink" href="#2-responseresult" title="Permanent link">&para;</a></h2>
+<p><strong>Namespace:</strong> <code>Erilshk\Vinti4Pay\Models</code>  # Representa o resultado de uma transação</p>
+<h3 id="propriedades">Propriedades<a class="headerlink" href="#propriedades" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">status: string        # Status da transação (SUCCESS, ERROR, CANCELLED, INVALID_FINGERPRINT)</span>
+<span class="x">message: string       # Mensagem legível</span>
+<span class="x">success: bool         # true se transação aprovada</span>
+<span class="x">data: array           # Dados brutos do callback</span>
+<span class="x">debugInfo: ?array     # Informações de depuração</span>
+<span class="x">dcc: ?array           # Informações de conversão de moeda (DCC)</span>
+<span class="x">detail: ?string       # Detalhes adicionais de erro</span>
+</code></pre></div>
+
+<h3 id="constantes">Constantes<a class="headerlink" href="#constantes" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">STATUS_SUCCESS</span>
+<span class="x">STATUS_ERROR</span>
+<span class="x">STATUS_CANCELLED</span>
+<span class="x">STATUS_INVALID_FINGERPRINT</span>
+</code></pre></div>
+
+<h3 id="metodos">Métodos<a class="headerlink" href="#metodos" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">getStatus(): string                 # Retorna status da transação</span>
+<span class="x">getMessage(): string                # Retorna mensagem legível</span>
+<span class="x">isSuccessful(): bool                # Retorna true se aprovado</span>
+<span class="x">isSuspicious(): bool                # Retorna true se fingerprint inválida</span>
+<span class="x">getData(): array                    # Retorna dados brutos</span>
+<span class="x">getDebugInfo(): ?array              # Retorna informações de debug</span>
+<span class="x">hasDcc(): bool                      # Retorna true se há DCC</span>
+<span class="x">getDcc(): ?array                    # Retorna dados DCC</span>
+<span class="x">getDetail(): ?string                 # Retorna detalhes adicionais</span>
+<span class="x">hasInvalidFingerprint(&amp;$result = null): ?string  # Retorna fingerprint inválida se houver</span>
+<span class="x">getStatusLabel(string $lang = &#39;en&#39;): string     # Retorna label legível do status</span>
+<span class="x">getMerchantReceipt(): string         # Retorna recibo do comerciante</span>
+<span class="x">toArray(): array                     # Converte objeto em array</span>
+<span class="x">jsonData(): string                   # Retorna dados JSON</span>
+<span class="x">onSuccess(callable $callback): self # Executa callback se transação aprovada</span>
+<span class="x">onError(callable $callback): self   # Executa callback se erro</span>
+<span class="x">onCancel(callable $callback): self  # Executa callback se cancelado</span>
+</code></pre></div>
+
+<hr />
+<h2 id="3-receipt">3. <code>Receipt</code><a class="headerlink" href="#3-receipt" title="Permanent link">&para;</a></h2>
+<p><strong>Namespace:</strong> <code>Erilshk\Vinti4Pay\Models</code>  # Gera recibos HTML</p>
+<h3 id="construtor_1">Construtor<a class="headerlink" href="#construtor_1" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">__construct(array $postedData, ?string $templatesPath = null)  # Inicializa com dados do callback e template opcional</span>
+</code></pre></div>
+
+<h3 id="metodos_1">Métodos<a class="headerlink" href="#metodos_1" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">getMessageType(): string  # Retorna tipo da mensagem (transaction, refund, service)</span>
+<span class="x">generateReceipt(?string $template = null, array $params = []): string  # Gera HTML do recibo com template ou padrão</span>
+<span class="x">saveReceipt(string $outputPath, ?string $template = null, array $params = []): string  # Salva HTML do recibo em arquivo</span>
+<span class="x">getHtml(): string  # Retorna último HTML gerado</span>
+</code></pre></div>
+
+<hr />
+<h3 id="observacoes-gerais">Observações gerais<a class="headerlink" href="#observacoes-gerais" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>Vinti4PayClient</code> é o ponto central para todas as operações de pagamento.</li>
+<li><code>ResponseResult</code> encapsula o retorno do gateway, permitindo acesso fácil a status, mensagens e dados brutos.</li>
+<li><code>Receipt</code> gera recibos HTML para visualização ou impressão, podendo usar templates ou gerar layout padrão.</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../examples/" class="btn btn-neutral float-left" title="Exemplos"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../standalone/" class="btn btn-neutral float-right" title="Vint4PayClient">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/erilshackle/vinti4pay-php" class="fa fa-code-fork" style="color: #fcfcfc"> erilshackle/vinti4pay-php</a>
+        </span>
+    
+    
+      <span><a href="../examples/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../standalone/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

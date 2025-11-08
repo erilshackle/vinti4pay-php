@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Eril TS Carvalho" /><link rel="canonical" href="https://github.com/erilshackle/vinti4pay-php/usage/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Uso - Vinti4Pay PHP SDK</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Uso";
+        var mkdocs_page_input_path = "usage.md";
+        var mkdocs_page_url = "/erilshackle/vinti4pay-php/usage/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Vinti4Pay PHP SDK
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introdução</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../installation/">Instalação</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../setup/">Configuração</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Uso</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-definicao-dos-dados-de-cobranca-setbillingparams">1. Definição dos Dados de Cobrança (setBillingParams)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#parametros-obrigatorios">Parâmetros Obrigatórios</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exemplo-de-uso-de-setbillingparams">Exemplo de Uso de setBillingParams</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-preparacao-de-transacoes">2. Preparação de Transações</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#a-preparar-compra-preparepurchase">A. Preparar Compra (preparePurchase)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#b-preparar-pagamento-de-servico-prepareservicepayment">B. Preparar Pagamento de Serviço (prepareServicePayment)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#c-preparar-recarga-preparerecharge">C. Preparar Recarga (prepareRecharge)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#d-preparar-estornoreembolso-preparerefund">D. Preparar Estorno/Reembolso (prepareRefund)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-gerar-o-formulario-de-pagamento">3. Gerar o Formulário de Pagamento</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#exemplo-final">Exemplo Final</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../callbacks/">Callbacks e Respostas</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../receipt/">Recibo</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../examples/">Exemplos</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Referência</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../reference/">API Detalhada</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../api/">Documentor</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standalone Class</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../standalone/">Vint4PayClient</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Changelogs</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../changelog/">Changelog</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Vinti4Pay PHP SDK</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Uso</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/erilshackle/vinti4pay-php/edit/master/docs/usage.md">Edit on erilshackle/vinti4pay-php</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="utilizacao">💻 Utilização<a class="headerlink" href="#utilizacao" title="Permanent link">&para;</a></h1>
+<p>A classe principal <strong><code>Vinti4PayClient</code></strong> é o motor do SDK, responsável por inicializar a transação, validar os dados, gerar a <em>fingerprint</em> de segurança e construir o formulário de pagamento.</p>
+<p>O fluxo de uso geralmente segue três passos:</p>
+<ol>
+<li><strong>Preparar Transação:</strong> Chamar o método <code>prepare*</code> específico (Ex: <code>preparePurchase</code>).</li>
+<li><strong>Configurar Billing:</strong> Definir os dados de cobrança do cliente quando for compra (<code>preparePurchase</code>).</li>
+<li><strong>Gerar Formulário:</strong> Chamar <code>createPaymentForm()</code> para obter o HTML de submissão.</li>
+</ol>
+<hr />
+<h2 id="1-definicao-dos-dados-de-cobranca-setbillingparams">1. Definição dos Dados de Cobrança (<code>setBillingParams</code>)<a class="headerlink" href="#1-definicao-dos-dados-de-cobranca-setbillingparams" title="Permanent link">&para;</a></h2>
+<p>A maioria das transações de compra e algumas outras operações exigem a definição detalhada dos dados de cobrança (<code>billing</code>) para atender aos requisitos de segurança (3D Secure/PCI).</p>
+<p>O método <code>setBillingParams()</code> valida e define esses dados, e pode ser encadeado antes do método de preparação da transação.</p>
+<h3 id="parametros-obrigatorios">Parâmetros Obrigatórios<a class="headerlink" href="#parametros-obrigatorios" title="Permanent link">&para;</a></h3>
+<p>O método exige os seguintes parâmetros para o bloco de <em>billing</em>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parâmetro</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>$email</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Email do cliente (validado pelo SDK).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>$country</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Código do País de Cobrança (ISO alpha-2 ou numérico).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>$city</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Cidade de Cobrança.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>$address</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Linha 1 do Endereço de Cobrança.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>$postCode</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Código Postal/ZIP.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="exemplo-de-uso-de-setbillingparams">Exemplo de Uso de <code>setBillingParams</code><a class="headerlink" href="#exemplo-de-uso-de-setbillingparams" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// 1. Defina os dados essenciais</span>
+<span class="x">$client-&gt;setBillingParams(</span>
+<span class="x">    email: &#39;cliente@exemplo.com&#39;,</span>
+<span class="x">    country: &#39;CV&#39;, // Cabo Verde (ou código numérico &#39;132&#39;)</span>
+<span class="x">    city: &#39;Mindelo&#39;,</span>
+<span class="x">    address: &#39;Rua Principal, 123&#39;,</span>
+<span class="x">    postCode: &#39;1000&#39;</span>
+<span class="x">); </span>
+
+<span class="x">// Você também pode passar um array com dados adicionais como o parâmetro $aditional</span>
+<span class="x">$client-&gt;setBillingParams(</span>
+<span class="x">    // ... Parâmetros obrigatórios</span>
+<span class="x">    // ...</span>
+<span class="x">    aditional: [</span>
+<span class="x">        &#39;addrMatch&#39; =&gt; &#39;Y&#39;, // Copia billing para shipping (se aplicável)</span>
+<span class="x">        &#39;billAddrState&#39; =&gt; &#39;SV&#39;, // Estado/Província</span>
+<span class="x">        &#39;mobilePhone&#39; =&gt; [&#39;cc&#39; =&gt; &#39;238&#39;, &#39;subscriber&#39; =&gt; &#39;9112233&#39;]</span>
+<span class="x">    ]</span>
+<span class="x">);</span>
+</code></pre></div>
+
+<hr />
+<h2 id="2-preparacao-de-transacoes">2. Preparação de Transações<a class="headerlink" href="#2-preparacao-de-transacoes" title="Permanent link">&para;</a></h2>
+<p>O <code>Vinti4PayClient</code> oferece métodos dedicados para cada tipo de operação:</p>
+<h3 id="a-preparar-compra-preparepurchase">A. Preparar Compra (<code>preparePurchase</code>)<a class="headerlink" href="#a-preparar-compra-preparepurchase" title="Permanent link">&para;</a></h3>
+<p>Código da Transação: <strong>1</strong></p>
+<p>Prepara uma transação de compra tradicional, exigindo o montante e os dados de <em>billing</em> definidos.</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Requer o array $billing completo. Se você usou setBillingParams(),</span>
+<span class="x">// o array com os dados de billing está armazenado internamente.</span>
+<span class="x">$client-&gt;preparePurchase(</span>
+<span class="x">    amount: 150.00, // Valor da compra</span>
+<span class="x">    billing: $billing, // Array de billing (se não usou setBillingParams)</span>
+<span class="x">    merchantRef: &#39;PEDIDO_XYZ_001&#39;, // Referência opcional</span>
+<span class="x">    merchantSession: &#39;SESSION_ABC_123&#39; // Sessão opcional</span>
+<span class="x">);</span>
+</code></pre></div>
+
+<h3 id="b-preparar-pagamento-de-servico-prepareservicepayment">B. Preparar Pagamento de Serviço (<code>prepareServicePayment</code>)<a class="headerlink" href="#b-preparar-pagamento-de-servico-prepareservicepayment" title="Permanent link">&para;</a></h3>
+<p>Código da Transação: <strong>2</strong></p>
+<p>Prepara um pagamento de fatura ou serviço via SISP, exigindo o código da entidade e o número de referência.</p>
+<div class="codehilite"><pre><span></span><code><span class="x">$client-&gt;prepareServicePayment(</span>
+<span class="x">    amount: 5000.00,</span>
+<span class="x">    entity: &#39;20002&#39;, // Código da Entidade (Ex: Eletricidade)</span>
+<span class="x">    reference: &#39;00123456789&#39;, // Referência da Fatura</span>
+<span class="x">    merchantRef: &#39;FATURA_ELE_10203&#39;</span>
+<span class="x">);</span>
+</code></pre></div>
+
+<h3 id="c-preparar-recarga-preparerecharge">C. Preparar Recarga (<code>prepareRecharge</code>)<a class="headerlink" href="#c-preparar-recarga-preparerecharge" title="Permanent link">&para;</a></h3>
+<p>Código da Transação: <strong>3</strong></p>
+<p>Prepara uma transação de recarga (ex: telemóvel/celular), exigindo entidade e o número a recarregar.</p>
+<div class="codehilite"><pre><span></span><code><span class="x">$client-&gt;prepareRecharge(</span>
+<span class="x">    amount: 500.00,</span>
+<span class="x">    entity: &#39;20003&#39;, // Ex: Operadora Móvel</span>
+<span class="x">    number: &#39;991234567&#39;, // Número para Recarga</span>
+<span class="x">    merchantSession: &#39;REC_SESS_456&#39;</span>
+<span class="x">);</span>
+</code></pre></div>
+
+<h3 id="d-preparar-estornoreembolso-preparerefund">D. Preparar Estorno/Reembolso (<code>prepareRefund</code>)<a class="headerlink" href="#d-preparar-estornoreembolso-preparerefund" title="Permanent link">&para;</a></h3>
+<p>Código da Transação: <strong>'refund'</strong></p>
+<p>Prepara uma transação de estorno, que é processada de forma diferente dos pagamentos diretos.</p>
+<div class="codehilite"><pre><span></span><code><span class="x">$client-&gt;prepareRefund(</span>
+<span class="x">    amount: 15.00,</span>
+<span class="x">    merchantRef: &#39;ESTORNO_PEDIDO_001&#39;,</span>
+<span class="x">    merchantSession: &#39;SESSAO_ORIGINAL_XYZ&#39;,</span>
+<span class="x">    transactionID: &#39;ID_TRANSACAO_SIS_12345&#39;, // ID da transação original</span>
+<span class="x">    clearingPeriod: &#39;202401&#39; // Período de compensação (AAAA MM)</span>
+<span class="x">);</span>
+</code></pre></div>
+
+<blockquote>
+<p>🌟 <strong>Observação:</strong> O SDK lança uma <code>Vinti4Exception</code> se você tentar preparar uma nova transação sem que a anterior tenha sido processada (o objeto só pode preparar uma por vez).</p>
+</blockquote>
+<hr />
+<h2 id="3-gerar-o-formulario-de-pagamento">3. Gerar o Formulário de Pagamento<a class="headerlink" href="#3-gerar-o-formulario-de-pagamento" title="Permanent link">&para;</a></h2>
+<p>Após a preparação, você deve chamar o método <code>createPaymentForm()</code> para obter o código HTML que será submetido ao gateway Vinti4Net.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Parâmetro</th>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>$responseUrl</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;"><strong>URL de Callback/Resposta</strong> onde o Vinti4Net enviará a resposta da transação.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>$redirectMessage</code></td>
+<td style="text-align: left;"><code>string</code></td>
+<td style="text-align: left;">Mensagem a ser exibida ao cliente enquanto o formulário é submetido automaticamente. (opcional)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="exemplo-final">Exemplo Final<a class="headerlink" href="#exemplo-final" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$responseUrl = &#39;https://seusite.com/vinti4_callback.php&#39;;</span>
+
+<span class="x">// 1. Preparação (exemplo: compra)</span>
+<span class="x">$client-&gt;preparePurchase(</span>
+<span class="x">    amount: 1000.00, </span>
+<span class="x">    billing: [], </span>
+<span class="x">    merchantRef: &#39;NOVO_PED_002&#39;</span>
+<span class="x">);</span>
+
+<span class="x">// 2. Definicao da faturação </span>
+<span class="x">$client-&gt;setBillingParams(</span>
+<span class="x">    email: $user[&#39;email&#39;], </span>
+<span class="x">    country: $user[&#39;country&#39;], </span>
+<span class="x">    city: $user[&#39;city&#39;],</span>
+<span class="x">    address: $user[&#39;address&#39;], </span>
+<span class="x">    postCode: $user[&#39;postCode&#39;],</span>
+<span class="x">    aditional: [</span>
+<span class="x">    &#39;user&#39; =&gt; $user</span>
+<span class="x">]);</span>
+
+<span class="x">// 3. Geração do Formulário</span>
+<span class="x">$htmlForm = $client-&gt;createPaymentForm($responseUrl);</span>
+
+<span class="x">// 4. Imprima o formulário para submissão automática via Javascript/HTML</span>
+<span class="x">echo $htmlForm;</span>
+</code></pre></div>
+
+<p>O <code>$htmlForm</code> é um formulário HTML que deve ser exibido diretamente ao cliente, que o submeterá ao Vinti4Net.</p>
+<hr />
+<blockquote>
+<p><strong>Próximo Passo:</strong> Com a preparação feita, aprenda a tratar as respostas na seção <strong><a href="../callbacks/">Callbacks e Respostas</a></strong>.</p>
+</blockquote>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../setup/" class="btn btn-neutral float-left" title="Configuração"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../callbacks/" class="btn btn-neutral float-right" title="Callbacks e Respostas">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/erilshackle/vinti4pay-php" class="fa fa-code-fork" style="color: #fcfcfc"> erilshackle/vinti4pay-php</a>
+        </span>
+    
+    
+      <span><a href="../setup/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../callbacks/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
