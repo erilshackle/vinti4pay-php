@@ -2,7 +2,10 @@ composer.phar
 /vendor/
 /mkdocs/
 /includes/
+/.idea/
 /.vscode/
+/coverage/
+
 
 mkdocs.yml
 
