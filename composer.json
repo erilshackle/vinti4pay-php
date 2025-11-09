@@ -3,7 +3,7 @@
     "description": "SDK PHP para integração com a plataforma Vinti4Net de Cabo Verde (Sisp -  Transactions, Refunds, DCC and Secure).",
     "type": "library",
     "license": "MIT",
-    "keywords": ["sisp", "vinti4", "vinti4net", "RedeVinti4", "payment gateway", "cabo verde", "3ds", "php", "web payment cv"],
+    "keywords": ["sisp", "vinti4", "vinti4net", "vinti4 sisp", "RedeVinti4", "payment gateway", "cabo verde", "3ds", "php", "web payment cv"],
     "homepage": "https://github.com/erilshk/vinti4pay-php",
     "support": {
         "issues": "https://github.com/erilshackle/vinti4pay-php/issues",

@@ -396,8 +396,8 @@ class Vinti4PayClient
         }
 
         $prepared = $this->sdk->preparePayment($responseUrl, array_merge(
+            $this->request,
             $this->params,
-            $this->request
         ));
 
         return $this->sdk->renderForm($prepared);
