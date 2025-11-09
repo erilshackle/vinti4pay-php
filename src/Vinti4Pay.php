@@ -282,7 +282,7 @@ class Vinti4Pay
             'merchantRef' => $params['merchantRef'],
             'merchantSession' => $params['merchantSession'],
             'amount' => (int)$params['amount'],
-            'currency' => $params['currency'] ?? self::CURRENCY_CVE,
+            'currency' => self::CURRENCY_CVE,
             'clearingPeriod' => $params['clearingPeriod'],
             'transactionID' => $params['transactionID'],
             'reversal' => 'R',
