@@ -93,8 +93,11 @@ class ResponseResult  implements JsonSerializable
         return $this->status === self::STATUS_INVALID_FINGERPRINT;
     }
 
-    public function getData(): array
+    public function getData(?string $param = null): array
     {
+        if($param){
+            return $this->data[$param] ?? null;
+        }
         return $this->data;
     }
 

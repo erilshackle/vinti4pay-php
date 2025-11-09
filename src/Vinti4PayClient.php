@@ -378,7 +378,7 @@ class Vinti4PayClient
      *     'email' => 'customer@email.cv'
      * ];
      *
-     * $vinti4Pay->preparePurchase(1500.00, $billing);
+     * $vinti4Pay->preparePurchase(1500, $billing);
      *
      * # Generate HTML form for submission
      * $htmlForm = $vinti4Pay->createPaymentForm('https://mysite.cv/vinti4/callback');
