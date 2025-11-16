@@ -31,7 +31,10 @@ jobs:
         run: vendor/bin/phpunit --coverage-clover=coverage.xml
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v3
         with:
-          files: coverage.xml
+          file: coverage.xml
+          flags: unittests
+          token: ${{ secrets.CODECOV_VINTI4PAY_TOKEN }}
           fail_ci_if_error: true
+
