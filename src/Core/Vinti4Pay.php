@@ -1,6 +1,6 @@
 <?php
 
-namespace Erilshk\Vinti4Pay;
+namespace Erilshk\Vinti4Pay\Core;
 
 use Erilshk\Vinti4Pay\Models\ResponseResult;
 use Erilshk\Vinti4Pay\Exceptions\Vinti4Exception;

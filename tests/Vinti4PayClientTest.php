@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Erilshk\Vinti4Pay\Vinti4Pay;
+use Erilshk\Vinti4Pay\Core\Vinti4Pay;
 use Erilshk\Vinti4Pay\Vinti4PayClient;
 use Erilshk\Vinti4Pay\Exceptions\Vinti4Exception;
 use Erilshk\Vinti4Pay\Models\ResponseResult;
