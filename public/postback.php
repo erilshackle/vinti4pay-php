@@ -1,5 +1,7 @@
 <?php
 
+use Erilshk\Vinti4Pay\Vinti4PayClient;
+
 include '../dist/Vinti4PayClient.php';
 
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");

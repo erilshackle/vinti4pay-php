@@ -3,6 +3,8 @@
 /docs export-ignore
 /tests export-ignore
 /.github export-ignore
+/src/services export-ignore
+/src/Core export-ignore
 
 # Excluir arquivos extras
 /.gitignore export-ignore
